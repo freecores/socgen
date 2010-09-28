@@ -1,0 +1,28 @@
+initial
+begin
+$display("              ");
+$display("              ===================================================");
+$display("              Test Start");
+$display("              ===================================================");
+$display("              ");
+cg.next(20);
+cg.reset_off;
+uart_model.rcv_byte(8'h42);
+uart_model.send_byte(8'h65);
+uart_model.rcv_byte(8'h65);
+uart_model.send_byte(8'h37);
+uart_model.rcv_byte(8'h37);
+uart_model.send_byte(8'h20);
+uart_model.rcv_byte(8'h20);
+uart_model.send_byte(8'h41);
+uart_model.rcv_byte(8'h41);
+uart_model.send_byte(8'h45);
+uart_model.rcv_byte(8'h45);
+uart_model.send_byte(8'h25);
+uart_model.rcv_byte(8'h25);
+cg.next(4000);
+cg.exit;
+end
+
+
+

@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>start</title>
+  <meta name="GENERATOR" content="OpenOffice.org 3.0  (Linux)">
+  <meta name="CREATED" content="0;0">
+  <meta name="CHANGED" content="20090513;8521600">
+  <meta name="KEYWORDS" content="start">
+  <meta name="Info 3" content="">
+  <meta name="Info 4" content="">
+  <meta name="date" content="2008-01-08T12:01:41-0500">
+  <meta name="robots" content="index,follow">
+</head>
+<body dir="ltr" lang="en-US">
+<h1><a name="cde_reset"></a>SOCGEN Datasheet:<br>
+</h1>
+<div id="toc__inside" dir="ltr">
+<ul>
+  <li>
+    <p style="margin-bottom: 0in;"><a href="#cde_reset">cde_reset<br>
+    </a></p>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Description">Description<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Parameters">Parameters<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Interface">Interface<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Theoryofoperation">Theory
+of Operation<br>
+        </a></p>
+      </li>
+      <li>
+        <p><a href="../../cde_dft/cde_reset.v">Source Code <br>
+        </a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+<h1><br>
+</h1>
+<br>
+<img style="width: 640px; height: 480px;" alt=""
+ src="../png/cde_reset.png"><br>
+<b><br>
+<br>
+</b>
+<h2><b><a name="Description"></a>Description</b></h2>
+This module provides a means to expand and resynchronise a reset signal. It is the basic building block for a synchronous reset distribution tree<br>
+<br>
+<br>
+<br>
+<h2><b><a name="Parameters"></a>Parameters<br>
+</b></h2>
+<table style="text-align: left; width: 500px; height: 120px;" border="8"
+ cellpadding="4" cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Name<br>
+      </td>
+      <td style="vertical-align: top;">default <br>
+      </td>
+      <td style="vertical-align: top;">Description of what it does<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">WIDTH<br>
+      </td>
+      <td style="vertical-align: top;">1<br>
+      </td>
+      <td style="vertical-align: top;">width of local resets<br>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="vertical-align: top;">DEPTH<br>
+      </td>
+      <td style="vertical-align: top;">1<br>
+      </td>
+      <td style="vertical-align: top;">number of delay stages <br>
+      </td>
+    </tr>
+
+
+
+  </tbody>
+</table>
+<b><br>
+<br>
+</b>
+<p><b><b><br>
+</b></b></p>
+<p><b><b><br>
+</b></b></p>
+<p><br>
+</p>
+<p><b><b><br>
+</b></b></p>
+<p><b><b><br>
+<br>
+</b></b></p>
+<h2><b><b><a name="Interface"></a>Interface</b><b>&nbsp;<br>
+</b></b></h2>
+<p style="margin-bottom: 0in;"></p>
+<table style="text-align: left; width: 366px; height: 152px;" border="8"
+ cellpadding="4" cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">NAME<br>
+      </td>
+      <td style="vertical-align: top;">Type<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="vertical-align: top;"> clk<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> clock input<br>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="vertical-align: top;"> async_reset_n<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> system wide active low aschronous reset<br>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="vertical-align: top;"> sync_reset[]<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> local active high synchronous reset(s)<br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="vertical-align: top;"> atg_asyncdisable<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> atg control signal during scan testing<br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="vertical-align: top;"> reset_n_out[]<br>
+      </td>
+      <td style="vertical-align: top;"> output<br>
+      </td>
+      <td style="vertical-align: top;"> local active low asynchronous reset(s) to flipflops<br>    
+   </td>
+    </tr>
+
+
+
+    <tr>
+      <td style="vertical-align: top;"> reset_out[]<br>
+      </td>
+      <td style="vertical-align: top;"> output<br>
+      </td>
+      <td style="vertical-align: top;"> local active high synchronous reset(s) to anywhere <br>    
+   </td>
+    </tr>
+
+
+
+
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2><b><a name="Theoryofoperation"></a>Theory of Operation<br>
+</b></h2>
+This module is the building block used to build a synchronous reset distribution tree. It provides a means to resync local resets and combine them with a system wide reset. Each reset consists of a pair of signals. One is the active low reset_n that can drive the asynchronous reset port of a flipflip and the other is the active high reset that can drive anything BUT the asynchronous reset port of a flipflop.
+
+The local synchronous reset(s) are resynced to ensure that everything is glitchfree. If they are sourced from an asynchronous clock domain then at least two stages of resync logic must be provided to prevent metastability issues.
+ <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

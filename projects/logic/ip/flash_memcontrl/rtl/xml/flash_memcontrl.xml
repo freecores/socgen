@@ -1,0 +1,25 @@
+<components>
+<component>
+   <name>flash_memcontrl</name>
+   <variant>flash_memcontrl</variant>
+      <library>
+          <child>
+            <name>cde_sram</name>
+            <parent>cde_sram</parent>
+            <family>cde</family>
+          </child>
+          <child>
+            <name>cde_sync_with_hysteresis</name>
+            <parent>cde_synchronizers</parent>
+            <family>cde</family>
+          </child>
+
+    </library>
+<sims>
+<sim>
+<name>default</name>
+</sim>
+</sims>
+
+</component>
+</components>

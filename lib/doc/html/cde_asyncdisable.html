@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>start</title>
+  <meta name="GENERATOR" content="OpenOffice.org 3.0  (Linux)">
+  <meta name="CREATED" content="0;0">
+  <meta name="CHANGED" content="20090513;8521600">
+  <meta name="KEYWORDS" content="start">
+  <meta name="Info 3" content="">
+  <meta name="Info 4" content="">
+  <meta name="date" content="2008-01-08T12:01:41-0500">
+  <meta name="robots" content="index,follow">
+</head>
+<body dir="ltr" lang="en-US">
+<h1><a name="cde_asyncdisable"></a>SOCGEN Datasheet:<br>
+</h1>
+<div id="toc__inside" dir="ltr">
+<ul>
+  <li>
+    <p style="margin-bottom: 0in;"><a href="#cde_asyncdisable">cde_asyncdisable<br>
+    </a></p>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Description">Description<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Parameters">Parameters<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Interface">Interface<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Theoryofoperation">Theory
+of Operation<br>
+        </a></p>
+      </li>
+      <li>
+        <p><a href="../../cde_dft/cde_asyncdisable.v">Source Code <br>
+        </a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+<h1><br>
+</h1>
+<br>
+<img style="width: 640px; height: 480px;" alt=""
+ src="../png/cde_asyncdisable.png"><br>
+<b><br>
+<br>
+</b>
+<h2><b><a name="Description"></a>Description</b></h2>
+The cde_asyncdisable module will convert a active high synchronous reset pulse into
+an active low asychronous signal that is testable by scan testing. It inserted between
+the source of a generated reset and the active low reset_n port of a flipflop. A system
+wide active low asynchronous reset_n input provides a means to test the flipflops reset_n
+port and a optional system wide synchronous input is available<br>
+<br>
+<br>
+<br>
+<h2><b><a name="Parameters"></a>Parameters<br>
+</b></h2>
+<table style="text-align: left; width: 500px; height: 120px;" border="8"
+ cellpadding="4" cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Name<br>
+      </td>
+      <td style="vertical-align: top;">default <br>
+      </td>
+      <td style="vertical-align: top;">Description of what it does<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">WIDTH<br>
+      </td>
+      <td style="vertical-align: top;">1<br>
+      </td>
+      <td style="vertical-align: top;">width of all the reset signals <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<b><br>
+<br>
+</b>
+<p><b><b><br>
+</b></b></p>
+<p><b><b><br>
+</b></b></p>
+<p><br>
+</p>
+<p><b><b><br>
+</b></b></p>
+<p><b><b><br>
+<br>
+</b></b></p>
+<h2><b><b><a name="Interface"></a>Interface</b><b>&nbsp;<br>
+</b></b></h2>
+<p style="margin-bottom: 0in;"></p>
+<table style="text-align: left; width: 366px; height: 152px;" border="8"
+ cellpadding="4" cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">NAME<br>
+      </td>
+      <td style="vertical-align: top;">Type<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="vertical-align: top;"> reset<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> system active high synchronous reset<br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="vertical-align: top;"> reset_n<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> system active low asynchronous reset<br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="vertical-align: top;"> atg_asyncdisable<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> disable async reset during scan testing<br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="vertical-align: top;"> sync_reset[]<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> local synchronous reset(s)<br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="vertical-align: top;"> reset_out[]<br>
+      </td>
+      <td style="vertical-align: top;"> output<br>
+      </td>
+      <td style="vertical-align: top;"> generated active high synchronous reset(s)<br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="vertical-align: top;"> reset_n_out[]<br>
+      </td>
+      <td style="vertical-align: top;"> output<br>
+      </td>
+      <td style="vertical-align: top;"> generated active low asynchronous reset(s)<br>
+      </td>
+    </tr>
+
+
+
+
+
+
+
+
+
+
+
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2><b><a name="Theoryofoperation"></a>Theory of Operation<br>
+</b></h2>
+This module provides a means to break the synchronous reset path during scan testing by gating it with a atg signal. The local synchronous reset inputs MUST be glitchfree and should only come from the Q output of a flipflop<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

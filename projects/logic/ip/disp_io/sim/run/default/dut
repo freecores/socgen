@@ -1,0 +1,137 @@
+
+
+
+
+reg   [3:0] btn_pad_in;
+reg   [7:0] sw_pad_in;
+
+wire   [7:0] led;
+wire   [6:0] seg;
+wire         dp;
+wire   [3:0] an;
+
+reg  [15:0]        PosD;
+reg  [7:0]         PosL;
+wire [7:0]         PosS;
+wire [3:0]         PosB;
+
+
+wire            clk_tgen;
+wire            out_tgen;
+wire            in_tgen;
+
+
+disp_io 
+dut ( .clk               (clk),
+      .reset             (reset),
+      .btn_pad_in        (btn_pad_in),
+      .sw_pad_in         (sw_pad_in),
+      .PosD              (PosD),
+      .PosL              (PosL),
+      .PosB              (PosB),
+      .PosS              (PosS),
+      .led_pad_out       (led),
+      .seg_pad_out       (seg),
+      .dp_pad_out        (dp),
+      .an_pad_out        (an)
+    );
+
+
+
+
+
+reg   [3:0] test_cnt;
+wire  [3:0] test_cnt_src;
+
+reg   [3:0] test_tar;
+
+always@(posedge clk)
+if(reset )  test_cnt <= 4'h0;
+else        test_cnt <= test_cnt+4'b0001;
+
+always@(posedge clk)
+if(reset )  test_tar <= 4'h0;
+else        test_tar <= test_tar+4'b0011;
+
+
+
+ timing_gen 
+#(.DELAY(10),
+  .WIDTH(20))
+clk_tgenx
+( .clk  (clk),
+  .reset (reset),
+  .tgen  (clk_tgen));
+
+
+timing_gen 
+#(.DELAY(5),
+  .WIDTH(35))
+out_tgenx
+( .clk  (clk),
+  .reset (reset),
+  .tgen  (out_tgen));
+
+
+
+timing_gen 
+#(.DELAY(15),
+  .WIDTH(25))
+in_tgenx
+( .clk  (clk),
+  .reset (reset),
+  .tgen  (in_tgen));
+
+
+
+
+ic_test_probe 
+clk_timer (       .signal           ( clk_src  ),
+                  .assert_value     ( 1'b1     ),
+                  .drive_value      ( 1'b1     ),
+                  .clk              ( clk      ),
+                  .tgen_out         ( clk_tgen ),
+                  .probe_type       (2'b10     )
+           );
+
+
+
+/*
+
+ic_test_probe 
+#(.SIGNAL_WIDTH(4))
+test_cnt_timer 
+               (.signal            ( test_cnt_src ),
+               .assert_value       ( 1'b1         ),
+               .drive_value        ( test_cnt     ),
+               .clk                ( clk          ),
+               .tgen_out           ( out_tgen     ),
+               .probe_type         (2'b00         )
+           );
+
+*/
+
+timed_driver 
+#(.WIDTH(4),
+  .PROBE_TYPE(2'b00))
+test_cnt_timer  (
+                 .clk           ( clk           ),
+                 .signal        ( test_cnt_src  ),
+                 .drive_value   ( test_cnt      ),
+                 .tgen          ( out_tgen      )
+                 );
+
+
+timed_tester 
+#(.WIDTH(4))
+tx
+(
+      .clk             ( clk           ),
+      .expected_value  ( test_tar      ),
+      .mask            (4'b1001        ),
+      .tgen            ( in_tgen       ),            
+      .signal          ( test_cnt_src  ),
+      .filtered_value  (               ),
+      .fail            (               )
+ 
+);      

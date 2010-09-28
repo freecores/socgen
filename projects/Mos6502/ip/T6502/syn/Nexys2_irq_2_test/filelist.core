@@ -1,0 +1,3 @@
+verilog work    ../../../../../children/logic/ip/disp_io/rtl/gen/syn/disp_io.v
+verilog work    ../../../../../children/logic/ip/flash_memcontrl/rtl/gen/syn/flash_memcontrl.v
+verilog work    ../../../../../children/logic/ip/usb_epp/rtl/gen/syn/usb_epp.v

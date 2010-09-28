@@ -1,0 +1,23 @@
+initial
+begin
+$display("              ");
+$display("              ===================================================");
+$display("              Test Start");
+$display("              ===================================================");
+$display("              ");
+cg.next(20);
+cg.reset_off;
+
+while (run == 1'b0) 
+begin
+
+
+cg.next(1);
+end
+
+
+cg.exit;
+end
+
+
+

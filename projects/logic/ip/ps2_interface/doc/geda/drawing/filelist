@@ -1,0 +1,4 @@
+`include  "../../../rtl/gen/syn/ps2_interface.v"
+`include "../../../../../../../../socgen/lib/cde_synchronizers/cde_sync_with_hysteresis.v"
+`include "../../../../../../../../socgen/lib/cde_serial_xmit/cde_serial_xmit.v"
+`include "../../../../../../../../socgen/lib/cde_serial_rcvr/cde_serial_rcvr.v"

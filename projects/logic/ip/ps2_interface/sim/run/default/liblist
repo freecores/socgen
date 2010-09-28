@@ -1,0 +1,4 @@
+`include "../../lib/cde_synchronizers/cde_sync_with_hysteresis.v"
+`include "../../lib/cde_serial_xmit/cde_serial_xmit.v"
+`include "../../lib/cde_serial_rcvr/cde_serial_rcvr.v"
+

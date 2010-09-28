@@ -1,0 +1,513 @@
+ 
+
+wire [7:0] alu_op_a;
+wire [7:0] alu_op_b;
+wire       alu_op_c;
+wire       alu_op_b_inv;
+
+
+reg [7:0] alu_op_a_drv;
+reg [7:0] alu_op_b_drv;
+reg       alu_op_c_drv;
+reg       alu_op_b_inv_drv;
+
+
+reg [7:0] next_alu_op_a;
+reg [7:0] next_alu_op_b;
+reg       next_alu_op_c;
+reg       next_alu_op_b_inv;
+
+
+
+
+ 
+wire  [7:0]   result;
+wire        r_result;
+wire        c_result;
+wire        v_result;
+
+wire  [7:0]   and_out;
+wire  [7:0]   orr_out;
+wire  [7:0]   eor_out;
+ 
+
+wire  [8:0]   a_sh_left;
+wire  [8:0]   a_sh_right;
+wire  [8:0]   b_sh_left;
+wire  [8:0]   b_sh_right;
+
+
+
+reg   [7:0]   exp_result;
+reg           exp_r_result;
+reg           exp_c_result;
+reg           exp_v_result;
+
+reg   [7:0]   exp_and_out;
+reg   [7:0]   exp_orr_out;
+reg   [7:0]   exp_eor_out;
+ 
+
+reg   [8:0]   exp_a_sh_left;
+reg   [8:0]   exp_a_sh_right;
+reg   [8:0]   exp_b_sh_left;
+reg   [8:0]   exp_b_sh_right;
+
+
+
+
+
+
+
+T6502_alu_logic 
+dut (
+             .alu_op_a     ( alu_op_a     ),
+             .alu_op_b     ( alu_op_b     ),
+             .alu_op_c     ( alu_op_c     ),
+             .alu_op_b_inv ( alu_op_b_inv ),
+ 
+             .result       ( result       ),
+             .r_result     ( r_result     ),
+             .c_result     ( c_result     ),
+             .v_result     ( v_result     ),
+
+             .and_out      ( and_out      ),
+             .orr_out      ( orr_out      ),
+             .eor_out      ( eor_out      ),
+ 
+             .a_sh_left    ( a_sh_left    ),
+             .a_sh_right   ( a_sh_right   ),
+             .b_sh_left    ( b_sh_left    ),
+             .b_sh_right   ( b_sh_right   )
+
+
+
+);
+
+
+reg run;
+reg next_run;
+
+
+
+always@(posedge clk)
+         if(reset)
+          begin
+          run              <= 1'b0;
+          alu_op_a_drv     <= 8'h00;
+          alu_op_b_drv     <= 8'h00;
+          alu_op_c_drv     <= 1'b0;
+          alu_op_b_inv_drv <= 1'b0;
+          end
+         else
+          begin
+          run              <= next_run;
+          alu_op_a_drv     <= next_alu_op_a;
+          alu_op_b_drv     <= next_alu_op_b;
+          alu_op_c_drv     <= next_alu_op_c;
+          alu_op_b_inv_drv <= next_alu_op_b_inv;
+          end
+
+
+
+
+
+always@(*)
+          begin
+          next_run           = run;
+          next_alu_op_a      = alu_op_a_drv;
+          next_alu_op_b      = alu_op_b_drv;
+          next_alu_op_c      = alu_op_c_drv;
+          next_alu_op_b_inv  = alu_op_b_inv_drv;
+
+
+         if(run)
+          begin
+          next_run           = 1'b1;
+          next_alu_op_a      = 8'h00;
+          next_alu_op_b      = 8'h00;
+          next_alu_op_c      = 1'b0;
+          next_alu_op_b_inv  = 1'b0;
+          end
+         else
+           begin
+             next_alu_op_a   = alu_op_a_drv+8'h01;
+             if(alu_op_a_drv == 8'hff)
+                begin
+                next_alu_op_b = alu_op_b_drv+8'h01;
+                if(alu_op_b_drv == 8'hff)
+                   begin
+                    {next_run,next_alu_op_c , next_alu_op_b_inv}  =  {run,alu_op_c_drv, alu_op_b_inv_drv} + 3'b001;
+                 end  
+              end
+           end
+          end
+
+
+
+always@(*)
+       begin
+              exp_and_out     =    alu_op_a_drv  & alu_op_b_drv;
+              exp_orr_out     =    alu_op_a_drv  | alu_op_b_drv;
+              exp_eor_out     =    alu_op_a_drv  ^ alu_op_b_drv;
+              exp_a_sh_left   =   {alu_op_a_drv,alu_op_c_drv};
+              exp_a_sh_right  =   {alu_op_a_drv[0],alu_op_c_drv, alu_op_a_drv[7:1]};
+              exp_b_sh_left   =   {alu_op_b_drv,alu_op_c_drv};
+              exp_b_sh_right  =   {alu_op_b_drv[0],alu_op_c_drv, alu_op_b_drv[7:1]};
+        end
+
+
+always@(*)
+       begin
+          if(alu_op_b_inv_drv)
+              begin
+              {exp_r_result,exp_result} =    alu_op_a_drv  - alu_op_b_drv - (!alu_op_c_drv)  ;
+               exp_c_result = !exp_r_result    ;
+               exp_v_result  =  ((alu_op_a_drv[7] == alu_op_b_drv[7]) && (alu_op_a_drv[7] != exp_result[7]));
+              end
+          else
+              begin
+              {exp_r_result,exp_result} =    alu_op_a_drv  + alu_op_b_drv + alu_op_c_drv  ;
+               exp_c_result = exp_r_result    ;
+               exp_v_result =  ((alu_op_a_drv[7] == alu_op_b_drv[7]) && (alu_op_a_drv[7] != exp_result[7]));
+              end
+
+
+
+        end
+
+
+
+
+
+
+
+io_probe 
+#(.WIDTH        (8),
+  .RESET        ({8{1'b0}}),
+  .IN_DELAY     (0),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+alu_op_a_tprb
+(
+     .clk                ( clk               ),
+     .drive_value        ( alu_op_a_drv      ),
+     .expected_value     (8'b0               ),
+     .mask               (8'b0               ),
+     .signal             ( alu_op_a          )
+ 
+);      
+
+
+
+
+
+io_probe 
+#(.WIDTH        (8),
+  .RESET        ({8{1'b0}}),
+  .IN_DELAY     (0),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+alu_op_b_tprb
+(
+     .clk                ( clk               ),
+     .drive_value        ( alu_op_b_drv      ),
+     .expected_value     (8'b0               ),
+     .mask               (8'b0               ),
+     .signal             ( alu_op_b          )
+ 
+);      
+
+
+
+
+
+
+
+io_probe 
+#(.WIDTH        (1),
+  .RESET        ({1{1'b0}}),
+  .IN_DELAY     (0),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+alu_op_c_tprb
+(
+     .clk                ( clk               ),
+     .drive_value        ( alu_op_c_drv      ),
+     .expected_value     (1'b0               ),
+     .mask               (1'b0               ),
+     .signal             ( alu_op_c          )
+ 
+);      
+
+
+
+
+
+
+
+io_probe 
+#(.WIDTH        (1),
+  .RESET        ({1{1'b0}}),
+  .IN_DELAY     (0),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+alu_op_b_inv_tprb
+(
+     .clk                ( clk               ),
+     .drive_value        ( alu_op_b_inv_drv  ),
+     .expected_value     (1'b0               ),
+     .mask               (1'b0               ),
+     .signal             ( alu_op_b_inv      )
+ 
+);      
+
+
+
+
+
+
+
+
+
+
+io_probe 
+#(.MESG("result error"),
+  .WIDTH        (8),
+  .RESET        ({8{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+result_tprb
+(
+     .clk                ( clk           ),
+     .drive_value        (8'bzzzzzzzz), 
+     .expected_value     ( exp_result    ),
+     .mask               (8'b11111111    ),
+     .signal             ( result        )
+ 
+);      
+
+
+
+
+
+
+io_probe 
+#(.MESG("and_out error"),
+  .WIDTH        (8),
+  .RESET        ({8{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+and_out_tprb
+(
+     .clk                ( clk           ),
+     .drive_value        (8'bzzzzzzzz), 
+     .expected_value     ( exp_and_out    ),
+     .mask               (8'b11111111    ),
+     .signal             ( and_out       )
+ 
+);      
+
+
+
+
+io_probe 
+#(.MESG("orr_out error"),
+  .WIDTH        (8),
+  .RESET        ({8{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+orr_out_tprb
+(
+     .clk                ( clk           ),
+     .drive_value        (8'bzzzzzzzz), 
+     .expected_value     ( exp_orr_out    ),
+     .mask               (8'b11111111    ),
+     .signal             ( orr_out       )
+ 
+);      
+
+
+
+
+io_probe 
+#(.MESG("eor_out error"),
+  .WIDTH        (8),
+  .RESET        ({8{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+eor_out_tprb
+(
+     .clk                ( clk           ),
+     .drive_value        (8'bzzzzzzzz), 
+     .expected_value     ( exp_eor_out    ),
+     .mask               (8'b11111111    ),
+     .signal             ( eor_out       )
+ 
+);      
+
+
+
+
+
+
+io_probe 
+#(.MESG("a_sh_left error"),
+  .WIDTH        (9),
+  .RESET        ({9{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+a_sh_left_tprb
+(
+     .clk                ( clk            ),
+     .drive_value        (9'bzzzzzzzzz    ), 
+     .expected_value     ( exp_a_sh_left  ),
+     .mask               (9'b111111111    ),
+     .signal             ( a_sh_left      )
+ 
+);      
+
+
+
+io_probe 
+#(.MESG("a_sh_right error"),
+  .WIDTH        (9),
+  .RESET        ({9{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+a_sh_right_tprb
+(
+     .clk                ( clk            ),
+     .drive_value        (9'bzzzzzzzzz    ), 
+     .expected_value     ( exp_a_sh_right  ),
+     .mask               (9'b111111111    ),
+     .signal             ( a_sh_right      )
+ 
+);      
+
+
+
+
+io_probe 
+#(.MESG("b_sh_left error"),
+  .WIDTH        (9),
+  .RESET        ({9{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+b_sh_left_tprb
+(
+     .clk                ( clk            ),
+     .drive_value        (9'bzzzzzzzzz    ), 
+     .expected_value     ( exp_b_sh_left  ),
+     .mask               (9'b111111111    ),
+     .signal             ( b_sh_left      )
+ 
+);      
+
+
+
+io_probe 
+#(.MESG("b_sh_right error"),
+  .WIDTH        (9),
+  .RESET        ({9{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+b_sh_right_tprb
+(
+     .clk                ( clk            ),
+     .drive_value        (9'bzzzzzzzzz    ), 
+     .expected_value     ( exp_b_sh_right  ),
+     .mask               (9'b111111111    ),
+     .signal             ( b_sh_right      )
+ 
+);      
+
+
+
+
+io_probe 
+#(.MESG("r_result error"),
+  .WIDTH        (1),
+  .RESET        ({1{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+r_result_tprb
+(
+     .clk                ( clk            ),
+     .drive_value        (1'bz    ), 
+     .expected_value     ( exp_r_result  ),
+     .mask               (1'b1    ),
+     .signal             ( r_result     )
+ 
+);      
+
+
+
+
+
+io_probe 
+#(.MESG("c_result error"),
+  .WIDTH        (1),
+  .RESET        ({1{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+c_result_tprb
+(
+     .clk                ( clk            ),
+     .drive_value        (1'bz    ), 
+     .expected_value     ( exp_c_result  ),
+     .mask               (1'b1    ),
+     .signal             ( c_result     )
+ 
+);      
+
+
+
+
+
+io_probe 
+#(.MESG("v_result error"),
+  .WIDTH        (1),
+  .RESET        ({1{1'bz}}),
+  .IN_DELAY     (5),
+  .OUT_DELAY    (15),
+  .OUT_WIDTH    (10)
+  )
+v_result_tprb
+(
+     .clk                ( clk            ),
+     .drive_value        (1'bz    ), 
+     .expected_value     ( exp_v_result  ),
+     .mask               (1'b1    ),
+     .signal             ( v_result     )
+ 
+);      
+
+
+
+
+

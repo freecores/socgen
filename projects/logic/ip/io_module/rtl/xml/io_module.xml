@@ -1,0 +1,207 @@
+<components>
+<component>
+   <name>io_module</name>
+   <variant>io_module</variant>
+
+      <brothers>     
+          <brother>
+            <variant>uart</variant>
+            <component>uart</component>
+          </brother>
+
+          <brother>
+            <variant>serial_rcvr</variant>
+            <component>serial_rcvr</component>
+          </brother>
+          <brother>
+            <variant>vga_char_ctrl</variant>
+            <component>vga_char_ctrl</component>
+          </brother>
+          <brother>
+            <variant>ps2_interface</variant>
+            <component>ps2_interface</component>
+          </brother>
+      </brothers>     
+
+      <library>     
+          <child>
+            <name>cde_sram</name>
+            <parent>cde_sram</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_fifo</name>
+            <parent>cde_fifo</parent>
+            <family>cde</family>
+          </child>
+
+
+          <child>
+            <name>cde_divider</name>
+            <parent>cde_divider</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_serial_rcvr</name>
+            <parent>cde_serial_rcvr</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_serial_xmit</name>
+            <parent>cde_serial_xmit</parent>
+            <family>cde</family>
+          </child>
+          <child>
+            <name>cde_sync_with_hysteresis</name>
+            <parent>cde_synchronizers</parent>
+            <family>cde</family>
+          </child>
+    </library>
+
+
+   <mem_map>
+        <mem_space>
+          <name>gpio_0</name>
+          <value>02</value>
+        </mem_space>
+        <mem_space>
+          <name>gpio_1</name>
+          <value>06</value>
+        </mem_space>
+        <mem_space>
+          <name>tim0_start</name>
+          <value>10</value>
+        </mem_space>
+        <mem_space>
+          <name>tim0_count</name>
+          <value>12</value>
+        </mem_space>
+        <mem_space>
+          <name>tim0_end</name>
+          <value>14</value>
+        </mem_space>
+        <mem_space>
+          <name>tim1_start</name>
+          <value>18</value>
+        </mem_space>
+        <mem_space>
+          <name>tim1_count</name>
+          <value>1A</value>
+        </mem_space>  
+        <mem_space>
+          <name>tim1_end</name>
+          <value>1C</value>
+        </mem_space>
+        <mem_space>
+          <name>uart_xmt</name>
+          <value>20</value>
+        </mem_space>
+        <mem_space>
+          <name>uart_rcv</name>
+          <value>22</value>
+        </mem_space>  
+        <mem_space>
+          <name>uart_cnt</name>
+          <value>24</value>
+        </mem_space>   
+        <mem_space>
+          <name>uart_stat</name>
+          <value>26</value>
+        </mem_space>
+        <mem_space>
+          <name>pic_int</name>
+          <value>30</value>
+        </mem_space>
+        <mem_space>
+          <name>pic_irq_en</name>
+          <value>32</value>
+        </mem_space>
+        <mem_space>
+          <name>pic_nmi_en</name>
+          <value>34</value>
+        </mem_space>   
+        <mem_space>
+          <name>pic_irq_ac</name>
+          <value>36</value>
+        </mem_space>  
+        <mem_space>
+          <name>pic_nmi_ac</name>
+          <value>38</value>
+        </mem_space>   
+        <mem_space>
+          <name>ps2_data</name>
+          <value>40</value>
+        </mem_space>  
+        <mem_space>
+          <name>ps2_stat</name>
+          <value>42</value>
+        </mem_space>   
+        <mem_space>
+          <name>ps2_cntrl</name>
+          <value>44</value>
+        </mem_space>  
+        <mem_space>
+          <name>ps2_xpos</name>
+          <value>46</value>
+        </mem_space>   
+        <mem_space>
+          <name>ps2_ypos</name>
+          <value>48</value>
+        </mem_space>   
+        <mem_space>
+          <name>utim_lat</name>
+          <value>50</value>
+        </mem_space>   
+        <mem_space>
+          <name>utim_cnt</name>
+          <value>52</value>
+        </mem_space>   
+        <mem_space>
+          <name>vga_ascii</name>
+          <value>60</value>
+        </mem_space>  
+        <mem_space>
+          <name>vga_addl</name>
+          <value>62</value>
+        </mem_space>  
+        <mem_space>
+          <name>vga_addh</name>
+          <value>64</value>
+        </mem_space>  
+        <mem_space>
+          <name>vga_cntrl</name>
+          <value>66</value>
+        </mem_space> 
+        <mem_space>
+          <name>vic_int</name>
+          <value>80</value>
+        </mem_space> 
+        <mem_space>
+          <name>vic_irq_en</name>
+          <value>82</value>
+        </mem_space> 
+        <mem_space>
+          <name>vic_irq_ac</name>
+          <value>86</value>
+        </mem_space>  
+        <mem_space>
+          <name>vic_vec</name>
+          <value>88</value>
+        </mem_space>
+       
+
+
+   </mem_map>
+
+
+<sims>
+<sim>
+<name>default</name>
+</sim>
+</sims>
+
+</component>
+</components>

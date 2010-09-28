@@ -1,0 +1,45 @@
+<components>
+<component>
+   <name>serial_rcvr</name>
+   <variant>serial_rcvr</variant>
+      <library>
+          <child>
+            <name>cde_sram</name>
+            <parent>cde_sram</parent>
+            <family>cde</family>
+          </child>
+          <child>
+            <name>cde_fifo</name>
+            <parent>cde_fifo</parent>
+            <family>cde</family>
+          </child>
+          <child>
+            <name>cde_sync_with_hysteresis</name>
+            <parent>cde_synchronizers</parent>
+            <family>cde</family>
+          </child>
+          <child>
+            <name>cde_divider</name>
+            <parent>cde_divider</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_serial_rcvr</name>
+            <parent>cde_serial_rcvr</parent>
+            <family>cde</family>
+          </child>
+
+
+
+
+    </library>
+
+<sims>
+<sim>
+<name>default</name>
+</sim>
+</sims>
+
+</component>
+</components>

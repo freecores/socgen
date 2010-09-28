@@ -1,0 +1,5 @@
+`include "../../lib/cde_serial_rcvr/cde_serial_rcvr.v"
+`include "../../lib/cde_divider/cde_divider.v"
+`include "../../lib/cde_fifo/cde_fifo.v"
+`include "../../lib/cde_sram/cde_sram.v"
+

@@ -1,0 +1,70 @@
+[timestart] 0
+[size] 1743 999
+[pos] 131 -505
+*-19.645218 4149540 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TB.
+[treeopen] TB.dut.
+@28
+TB.ps2_clk
+TB.ps2_data
+TB.host_busy
+TB.host_read
+TB.host_rx_clr
+TB.ps2_clk_oe
+@22
+TB.host_rx_data[7:0]
+TB.host_tx_data[7:0]
+@28
+TB.host_write
+TB.device_stop
+TB.device_ack
+TB.ps2.ack
+TB.ps2.device_ack
+@22
+TB.ps2.bit_cnt[4:0]
+TB.dut.bit_count[3:0]
+@28
+TB.dut.shift_frame
+TB.dut.frame_err
+TB.dut.tx_ack_error
+TB.dut.sending
+TB.clk
+@22
+TB.dut.frame[10:0]
+@28
+TB.dut.X_be
+TB.dut.load_tx_data
+TB.ps2_data_oe
+@22
+TB.dut.tx_data[7:0]
+TB.dut.x_shift_buffer[7:0]
+@28
+TB.dut.x_frame_err
+TB.dut.x_last_cnt
+TB.dut.x_parity_calc
+TB.dut.x_parity_samp
+TB.dut.x_stop_cnt
+TB.dut.ps2_data_s
+TB.dut.ps2_clk_s
+@22
+TB.dut.fsm.state[3:0]
+@28
+TB.dut.ps2_clk_fall
+TB.dut.ps2_clk_rise
+TB.dut.fsm.busy
+TB.rx_full
+TB.dut.Rx_full
+@22
+TB.dut.rx_data[7:0]
+@23
+TB.dut.Rx_data[7:0]
+@28
+TB.rx_frame_error
+TB.dut.Rx_frame_error
+TB.rx_parity_cal
+TB.dut.Rx_parity_cal
+TB.rx_parity_error
+TB.dut.Rx_parity_error
+TB.rx_parity_rcv
+TB.dut.Rx_parity_rcv
+TB.dut.clr_rx_full

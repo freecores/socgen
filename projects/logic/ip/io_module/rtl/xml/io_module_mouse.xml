@@ -1,0 +1,68 @@
+<components>
+<component>
+   <name>io_module</name>
+   <variant>io_module_mouse</variant>
+
+
+      <brothers>     
+          <brother>
+            <variant>uart</variant>
+            <component>uart</component>
+          </brother>
+          <brother>
+            <variant>serial_rcvr</variant>
+            <component>serial_rcvr</component>
+          </brother>
+          <brother>
+            <variant>ps2_interface</variant>
+            <component>ps2_interface</component>
+          </brother>
+      </brothers>     
+
+      <library>
+          <child>
+            <name>cde_sram</name>
+            <parent>cde_sram</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_fifo</name>
+            <parent>cde_fifo</parent>
+            <family>cde</family>
+          </child>
+
+
+          <child>
+            <name>cde_divider</name>
+            <parent>cde_divider</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_serial_rcvr</name>
+            <parent>cde_serial_rcvr</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_serial_xmit</name>
+            <parent>cde_serial_xmit</parent>
+            <family>cde</family>
+          </child>
+          <child>
+            <name>cde_sync_with_hysteresis</name>
+            <parent>cde_synchronizers</parent>
+            <family>cde</family>
+          </child>
+    </library>
+
+<sims>
+<sim>
+<name>mouse</name>
+</sim>
+</sims>
+
+
+</component>
+</components>

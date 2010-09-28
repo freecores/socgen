@@ -1,0 +1,20 @@
+[size] 1470 761
+[pos] 193 -382
+*-21.266296 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TB.
+[treeopen] TB.dut.
+[treeopen] TB.dut.io_module.
+[treeopen] TB.dut.io_module.ps2.
+@28
+TB.ps2_clk
+TB.ps2_data
+TB.dut.io_module.ps2.rx_data_avail
+@22
+TB.dut.io_module.ps2.rcv_data[7:0]
+TB.dut.io_module.ps2.cntrl[7:0]
+@28
+TB.dut.io_module.ps2.tx_ack_error
+TB.dut.io_module.ps2.rx_parity_error
+@22
+TB.dut.gpio_0_out[7:0]
+TB.dut.gpio_1_out[7:0]

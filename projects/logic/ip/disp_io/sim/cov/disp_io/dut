@@ -1,0 +1,37 @@
+reg   [3:0] btn_pad_in;
+reg   [7:0] sw_pad_in;
+
+wire   [7:0] led;
+wire   [6:0] seg;
+wire         dp;
+wire   [3:0] an;
+
+reg  [15:0]        PosD;
+reg  [7:0]         PosL;
+wire [7:0]         PosS;
+wire [3:0]         PosB;
+
+
+wire            clk_tgen;
+wire            out_tgen;
+wire            in_tgen;
+
+
+disp_io 
+dut ( .clk               (clk),
+      .reset             (reset),
+      .btn_pad_in        (btn_pad_in),
+      .sw_pad_in         (sw_pad_in),
+      .PosD              (PosD),
+      .PosL              (PosL),
+      .PosB              (PosB),
+      .PosS              (PosS),
+      .led_pad_out       (led),
+      .seg_pad_out       (seg),
+      .dp_pad_out        (dp),
+      .an_pad_out        (an)
+    );
+
+
+
+

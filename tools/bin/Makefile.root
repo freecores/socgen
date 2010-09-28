@@ -1,0 +1,281 @@
+SHELL=/bin/sh
+MAKE=make
+
+VPP_NAME=vppreproc
+VERILOG_NAME=iverilog
+
+CUR_DIR=$(shell pwd)
+VAR_DIR=$(CUR_DIR)/variants
+SRC_DIR=$(CUR_DIR)/verilog
+GEN_DIR=$(CUR_DIR)/gen
+
+
+
+
+
+
+
+################################################################################
+# Build software
+################################################################################
+
+.PHONY asm_6502:
+asm_6502: 
+	(\
+	echo "#################################################################"; \
+	echo; \
+	echo "assembling: $(code)    ####"; echo; \
+	crasm $(code).asm -o $(code).hex > $(code).lst; \
+	hex2abs16 $(code); \
+	hex2abs   $(code); \
+	hex2abs_split $(code); \
+	)
+
+
+
+
+
+
+
+.PHONY asm_pic:
+asm_pic: 
+	(\
+	echo "#################################################################"; \
+	echo; \
+	echo "assembling: $(code)    ####"; echo; \
+	gpasm $(code).asm -o $(code).hex > $(code).lst; \
+	hex2abs12 $(code); \
+	)
+
+
+
+
+
+
+
+
+
+.PHONY asm_msp430:
+asm_msp430: 
+	(\
+	echo "#######################################################"; \
+	echo; \
+	echo "assembling: $(code)    ####"; echo; \
+	cp ../$(io)/template.def ./$(io).def ;\
+	sed -i "s/PMEM_BASE/$(start)/g" $(io).def;\
+	sed -i "s/PMEM_SIZE/$(pmem)/g" $(io).def;\
+	sed -i "s/DMEM_SIZE/$(dmem)/g" $(io).def;\
+	msp430-as -alsm $(code).s43 -o $(io).o   > $(io).l43 ;\
+	msp430-objdump -xdsStr       $(io).o    >> $(io).l43 ;\
+	msp430-ld      -T ./$(io).def $(io).o   -o $(io).elf  ;\
+	msp430-objcopy -O ihex       $(io).elf    $(io).hex ;\
+	hex2abs_split $(io); \
+	)
+
+
+
+
+
+
+################################################################################
+# set up coverage
+################################################################################
+
+
+
+.PHONY build_cov:
+build_cov:  
+	@for VARIANT in `ls $(CUR_DIR)/../cov`; do \
+	echo "################################################################################"; \
+	echo; \
+	echo "Coverage: $$VARIANT ####"; echo; \
+	cd   $(CUR_DIR)/../cov/$$VARIANT/;\
+	make build_cdd ;\
+	cd   $(CUR_DIR) ;\
+	done; \
+
+
+################################################################################
+# run coverage report
+################################################################################
+
+
+
+.PHONY print_cov:
+print_cov:  
+	@for VARIANT in `ls $(CUR_DIR)/../cov`; do \
+	echo "################################################################################"; \
+	echo; \
+	echo "Report Coverage: $$VARIANT ####"; echo; \
+	cd   $(CUR_DIR)/../cov/$$VARIANT/;\
+	make report_cov;\
+	cd   $(CUR_DIR) ;\
+	done; \
+
+
+
+
+
+
+################################################################################
+# run simulation suite
+################################################################################
+
+
+.PHONY clean_sims:
+clean_sims:
+	(\
+	rm -f $(CUR_DIR)/../out/*;\
+	rm -f $(CUR_DIR)/../log/*;\
+	 )
+
+
+.PHONY run_sims:
+run_sims:   clean_sims build_cov
+	@for VARIANT_PROG in `ls $(CUR_DIR)/../run`; do \
+	echo "################################################################################"; \
+	echo; \
+	echo "Simulating: $$VARIANT_PROG ####"; echo; \
+	cd   $(CUR_DIR)/../run/$$VARIANT_PROG/;\
+	make sim;\
+	done; \
+
+
+.PHONY sim:
+sim:
+	(\
+	$(VERILOG_NAME) -D VCD ../../bench/verilog/TestBench 2>   ./${test}_sim.log  | tee >> ./${test}_sim.log              ;\
+	./a.out 2>>   ./${test}_sim.log     | tee >> ./${test}_sim.log ;\
+	mv *.log ../../log;\
+	mv   TestBench.vcd ../../out/${test}.vcd ;\
+	rm a.out;\
+	cd  ../../cov/${comp};\
+	make score_cov  TEST=${test} ;\
+	 )
+
+
+
+
+.PHONY rtlsim:
+rtlsim:
+	(\
+	$(VERILOG_NAME) -D VCD ../../../bench/verilog/TestBench;\
+	./a.out  | tee ./${test}_sim.log ;\
+	mv *.log ../../../log;\
+	mv   TestBench.vcd ../../../out/${test}.vcd ;\
+	rm a.out;\
+	 )
+
+
+
+
+
+
+
+.PHONY group_build_fpgas:
+group_build_fpgas:   
+	@for COMP in `ls $(CUR_DIR)/../ip`; do \
+	echo "################################################"; \
+	echo; \
+	echo "Synthesising: $$COMP ####"; echo; \
+	cd   $(CUR_DIR)/../ip/$$COMP/bin;\
+	make build_fpgas;\
+	done; \
+
+
+
+
+
+
+
+
+.PHONY build_fpgas:
+build_fpgas:   
+	@for COMP in `ls $(CUR_DIR)/../syn`; do \
+	echo "################################################"; \
+	echo; \
+	echo "Synthesising: $$COMP ####"; echo; \
+	cd   $(CUR_DIR)/../syn/$$COMP/;\
+	make fpga;\
+	done; \
+
+
+
+
+
+
+PHONY: fpga
+fpga:
+	(\
+	rm -r xilinx;\
+	mkdir xilinx;\
+	cd xilinx;\
+	rm   ../filelist;\
+	cp   ../filelist.core        ../filelist;\
+	cat  ../target/filelist >>   ../filelist;\
+	cat ../filelist.syn  >> ../filelist ;\
+	echo "run -ifn ../filelist    -ifmt mixed -top " $(board)_$(Design) " -ofn "  $(board)_$(Design)".ngc -ofmt NGC  -p "  $(Part) "-opt_mode Speed -opt_level 1" > Xst;\
+	xst -ifn ./Xst -ofn $(board)_$(Design).log;\
+	ngdbuild -dd _ngo -nt timestamp -p $(Part)  -uc ../target/Pad_Ring.ucf $(board)_$(Design);\
+	map  -p  $(Part)  -cm area -ir off -pr off  -c 100 -o $(board)_$(Design)_map.ncd $(board)_$(Design).ngd $(board)_$(Design).pcf;\
+	par -w  -ol std -t 1 $(board)_$(Design)_map.ncd $(board)_$(Design).ncd $(board)_$(Design).pcf ;\
+	trce -e 3 -s 5 -xml $(board)_$(Design) $(board)_$(Design).ncd -o $(board)_$(Design).twr $(board)_$(Design).pcf -ucf ../target/Pad_Ring.ucf ;\
+	netgen  -s 5  -pcf  $(board)_$(Design).pcf  -sdf_anno true -sdf_path "../gate_sims/par" -insert_glbl true -insert_pp_buffers true -w -dir ../gate_sims/par  -ofmt verilog -sim  $(board)_$(Design).ncd   $(board)_$(Design).v;\
+	bitgen -f ../target/cclk.ut  $(board)_$(Design).ncd;\
+	mv $(board)_$(Design).bit Board_Design_cclk.bit ;\
+	promgen -u 0 Board_Design_cclk ; \
+	mv Board_Design_cclk.mcs ../debug ;\
+	bitgen -f ../target/jtag.ut  $(board)_$(Design).ncd;\
+	mv $(board)_$(Design).bit Board_Design_jtag.bit ;\
+	impact -batch ../debug/impact_bat   ;\
+	mv *.bit ../debug ;\
+	)
+
+
+
+
+
+
+
+
+
+
+
+
+.PHONY group_build_sw:
+group_build_sw: group_start_sw
+	@for COMP in `ls $(CUR_DIR)/../sw`; do \
+	echo "################################################"; \
+	echo; \
+	echo "Linking: $$COMP ####"; echo; \
+	cd   $(CUR_DIR)/../sw/$$COMP;\
+	make all;\
+	done; \
+
+
+.PHONY group_start_sw:
+group_start_sw: 
+	@for CHILD in `ls $(CUR_DIR)/../children`; do \
+	echo "################################################"; \
+	echo; \
+	echo "Linking: $$CHILD ####"; echo; \
+	cd   $(CUR_DIR)/../children/$$CHILD/bin;\
+	${MAKE} group_build_sw;\
+	done; \
+
+
+
+.PHONY group_run_sims:
+group_run_sims: 
+	@for COMP in `ls $(CUR_DIR)/../ip`; do \
+	echo "################################################"; \
+	echo; \
+	echo "Linking: $$COMP ####"; echo; \
+	cd   $(CUR_DIR)/../ip/$$COMP/sim/bin;\
+	make run_sims  COMP=$$COMP ;\
+	make print_cov  ;\
+	done; \
+
+
+
+

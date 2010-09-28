@@ -1,0 +1,87 @@
+ 
+
+wire [7:0] alu_op_a;
+wire [7:0] alu_op_b;
+wire       alu_op_c;
+wire       alu_op_b_inv;
+
+
+reg [7:0] alu_op_a_drv;
+reg [7:0] alu_op_b_drv;
+reg       alu_op_c_drv;
+reg       alu_op_b_inv_drv;
+
+
+reg [7:0] next_alu_op_a;
+reg [7:0] next_alu_op_b;
+reg       next_alu_op_c;
+reg       next_alu_op_b_inv;
+
+
+
+
+ 
+wire  [7:0]   result;
+wire        r_result;
+wire        c_result;
+wire        v_result;
+
+wire  [7:0]   and_out;
+wire  [7:0]   orr_out;
+wire  [7:0]   eor_out;
+ 
+
+wire  [8:0]   a_sh_left;
+wire  [8:0]   a_sh_right;
+wire  [8:0]   b_sh_left;
+wire  [8:0]   b_sh_right;
+
+
+
+reg   [7:0]   exp_result;
+reg           exp_r_result;
+reg           exp_c_result;
+reg           exp_v_result;
+
+reg   [7:0]   exp_and_out;
+reg   [7:0]   exp_orr_out;
+reg   [7:0]   exp_eor_out;
+ 
+
+reg   [8:0]   exp_a_sh_left;
+reg   [8:0]   exp_a_sh_right;
+reg   [8:0]   exp_b_sh_left;
+reg   [8:0]   exp_b_sh_right;
+
+
+
+
+
+
+
+T6502_alu_logic 
+dut (
+             .alu_op_a     ( alu_op_a     ),
+             .alu_op_b     ( alu_op_b     ),
+             .alu_op_c     ( alu_op_c     ),
+             .alu_op_b_inv ( alu_op_b_inv ),
+ 
+             .result       ( result       ),
+             .r_result     ( r_result     ),
+             .c_result     ( c_result     ),
+             .v_result     ( v_result     ),
+
+             .and_out      ( and_out      ),
+             .orr_out      ( orr_out      ),
+             .eor_out      ( eor_out      ),
+ 
+             .a_sh_left    ( a_sh_left    ),
+             .a_sh_right   ( a_sh_right   ),
+             .b_sh_left    ( b_sh_left    ),
+             .b_sh_right   ( b_sh_right   )
+
+
+
+);
+
+

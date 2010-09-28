@@ -1,0 +1,168 @@
+<components>
+<component>
+   <name>soc_mouse</name>
+   <variant>soc_mouse_mrisc</variant>
+
+
+      <brothers>
+          <brother>
+            <variant>mrisc</variant>
+            <component>mrisc</component>
+          </brother>
+      </brothers>
+
+
+      <children>
+          <child>
+            <name>ps2_interface</name>
+            <parent>ps2_interface</parent>
+            <family>logic</family>
+          </child>
+          <child>
+            <name>io_module_mouse</name>
+            <parent>io_module</parent>
+            <family>logic</family>
+          </child>
+
+          <child>
+            <name>serial_rcvr</name>
+            <parent>serial_rcvr</parent>
+            <family>logic</family>
+          </child>
+
+
+          <child>
+            <name>uart</name>
+            <parent>uart</parent>
+            <family>logic</family>
+          </child>
+
+
+          <child>
+            <name>vga_char_ctrl</name>
+            <parent>vga_char_ctrl</parent>
+            <family>logic</family>
+          </child>
+
+
+
+
+      </children>
+
+
+
+      <library>
+          <child>
+            <name>cde_sram</name>
+            <parent>cde_sram</parent>
+            <family>cde</family>
+          </child>
+
+
+          <child>
+            <name>cde_fifo</name>
+            <parent>cde_fifo</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_divider</name>
+            <parent>cde_divider</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_serial_xmit</name>
+            <parent>cde_serial_xmit</parent>
+            <family>cde</family>
+          </child>
+
+          <child>
+            <name>cde_serial_rcvr</name>
+            <parent>cde_serial_rcvr</parent>
+            <family>cde</family>
+          </child>
+
+
+
+          <child>
+            <name>cde_sync_with_hysteresis</name>
+            <parent>cde_synchronizers</parent>
+            <family>cde</family>
+          </child>
+
+    </library>
+
+
+
+
+          <chips>
+          <chip>
+            <name>Nexys2_mouse_mrisc</name>
+            <target>Nexys2</target>
+    <children>
+          <child>
+            <name>disp_io</name>
+            <parent>disp_io</parent>
+            <family>logic</family>
+          </child>
+          <child>
+            <name>flash_memcontrl</name>
+            <parent>flash_memcontrl</parent>
+            <family>logic</family>
+          </child>
+          <child>
+            <name>usb_epp</name>
+            <parent>usb_epp</parent>
+            <family>logic</family>
+          </child>
+      </children>
+
+
+
+          </chip>
+          <chip>
+            <name>Basys_mouse_mrisc</name>
+            <target>Basys</target>
+
+    <children>
+          <child>
+            <name>disp_io</name>
+            <parent>disp_io</parent>
+            <family>logic</family>
+          </child>
+      </children>
+
+
+
+          </chip>
+          </chips>
+
+<sims>
+<sim>
+<name>mouse_mrisc</name>
+</sim>
+</sims>
+
+
+
+             <syn_children>
+          <child>
+            <name>disp_io</name>
+            <parent>disp_io</parent>
+            <family>logic</family>
+          </child>
+          <child>
+            <name>flash_memcontrl</name>
+            <parent>flash_memcontrl</parent>
+            <family>logic</family>
+          </child>
+          <child>
+            <name>usb_epp</name>
+            <parent>usb_epp</parent>
+            <family>logic</family>
+          </child>
+      </syn_children>
+
+</component>
+</components>

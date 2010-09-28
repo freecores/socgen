@@ -1,0 +1,8 @@
+`include  "../../../rtl/gen/syn/io_module.v"
+`include  "../../../../uart/rtl/gen/syn/uart.v"
+`include  "../../../../ps2_interface/rtl/gen/syn/ps2_interface.v"
+`include "../../lib/cde_synchronizers/cde_sync_with_hysteresis.v"
+
+
+
+

@@ -1,0 +1,222 @@
+eval 'exec `which perl` -S $0 ${1+"$@"}'
+   if 0;
+
+#/**********************************************************************/
+#/*                                                                    */
+#/*             -------                                                */
+#/*            /   SOC  \                                              */
+#/*           /    GEN   \                                             */
+#/*          /    TOOL    \                                            */
+#/*          ==============                                            */
+#/*          |            |                                            */
+#/*          |____________|                                            */
+#/*                                                                    */
+#/*  makes a directory in a composite                                  */
+#/*                                                                    */
+#/*                                                                    */
+#/*  Author(s):                                                        */
+#/*      - John Eaton, jt_eaton@opencores.org                          */
+#/*                                                                    */
+#/**********************************************************************/
+#/*                                                                    */
+#/*    Copyright (C) <2010>  <Ouabache Design Works>                   */
+#/*                                                                    */
+#/*  This source file may be used and distributed without              */
+#/*  restriction provided that this copyright statement is not         */
+#/*  removed from the file and that any derivative work contains       */
+#/*  the original copyright notice and the associated disclaimer.      */
+#/*                                                                    */
+#/*  This source file is free software; you can redistribute it        */
+#/*  and/or modify it under the terms of the GNU Lesser General        */
+#/*  Public License as published by the Free Software Foundation;      */
+#/*  either version 2.1 of the License, or (at your option) any        */
+#/*  later version.                                                    */
+#/*                                                                    */
+#/*  This source is distributed in the hope that it will be            */
+#/*  useful, but WITHOUT ANY WARRANTY; without even the implied        */
+#/*  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR           */
+#/*  PURPOSE.  See the GNU Lesser General Public License for more      */
+#/*  details.                                                          */
+#/*                                                                    */
+#/*  You should have received a copy of the GNU Lesser General         */
+#/*  Public License along with this source; if not, download it        */
+#/*  from http://www.opencores.org/lgpl.shtml                          */
+#/*                                                                    */
+#/**********************************************************************/
+
+# ToDO: add handling unaligned words
+
+
+############################################################################
+# General PERL config
+############################################################################
+use Getopt::Long;
+use English;
+use File::Basename;
+
+$OUTPUT_AUTOFLUSH = 1; # set autoflush of stdout to TRUE.
+
+
+############################################################################
+### Process the options
+############################################################################
+
+Getopt::Long::config("require_order", "prefix=-");
+GetOptions("h"
+) || die "(use '$program_name -h' for help)";
+
+
+##############################################################################
+## Help option
+##############################################################################
+if ( ($opt_h eq "1") ) 
+  { print "\n type> build_cmp  directory_name";
+    print "\n";
+    exit 1;
+  }
+
+
+
+#############################################################################
+## 
+##  
+## 
+#############################################################################
+
+my $design           = $ARGV[0];
+
+   $_  = qx(pwd);
+    chomp;
+my $home = $_;   
+
+
+my $cmd  = "ls  $design > /dev/null ";
+
+ 
+
+    if (system ($cmd) ) {
+        die "Failed to find $design ";
+       }
+
+ print " making $home/${design}_cmp\n";   
+
+ $cmd  = "mkdir   $home/${design}_cmp      > /dev/null " ;
+  if (system($cmd)) {die "Failed  $status ";}
+
+ $cmd  = "ln -s  $home/${design}/Makefile  $home/${design}_cmp      > /dev/null " ;
+  if (system($cmd)) {die "Failed  $status ";}
+
+ $cmd = "mkdir   $home/${design}_cmp/projects      > /dev/null ";
+  if (system($cmd)) {die "Failed  $status ";}
+
+
+
+
+  my @projects = qx(ls  $home/${design}/projects    );
+
+  foreach my $project (@projects) 
+       {        
+       chomp($project);
+       $cmd  = "mkdir   ${home}/${design}_cmp/projects/${project}      > /dev/null " ;
+        if (system($cmd)) {die "Failed ";}
+       $cmd  = "lndir -silent  ${home}/${design}/projects/${project}  ${home}/${design}_cmp/projects/${project}  " ;
+        if (system($cmd)) {die "Failed   ";}
+        my @components = qx(ls  ${home}/${design}/projects/${project}/ip    );
+        foreach my $component (@components) 
+         {
+        chomp($component);
+
+        $cmd  = "mkdir   ${home}/${design}_cmp/projects/${project}/ip/${component}/sim/bench  " ;
+        if (system($cmd)) {}
+        $cmd  = "mkdir   ${home}/${design}_cmp/projects/${project}/ip/${component}/sim/lib  " ;
+        if (system($cmd)) {}
+        $cmd  = 
+        "lndir -silent ${home}/${design}/bench   ${home}/${design}_cmp/projects/${project}/ip/${component}/sim/bench  " ;
+        if (system($cmd)) {die "Failed ";}
+        $cmd  = 
+        "lndir -silent ${home}/${design}/lib    ${home}/${design}_cmp/projects/${project}/ip/${component}/sim/lib  " ;
+        if (system($cmd)) {die "Failed ";}
+
+
+        my @syns = qx(ls  ${home}/${design}/projects/${project}/ip/${component}/syn    );
+        foreach my $syn (@syns) 
+         {
+           chomp($syn);
+           print ("SYN   $syn \n");
+
+             my @targets = qx(ls  ${home}/${design}/projects/${project}/ip/${component}/syn/${syn}/target    );
+
+        foreach my $target (@targets) 
+         {
+           chomp($target);
+           print ("TARGET   $target \n");
+
+           $cmd  = 
+           "lndir -silent ${home}/${design}/targets/${target}   ${home}/${design}_cmp/projects/${project}/ip/${component}/syn/${syn}/target  " ;
+           if (system($cmd)) {}
+
+           $cmd  = 
+           "lndir -silent ${home}/${design}/lib    ${home}/${design}_cmp/projects/${project}/ip/${component}/syn/${syn}/target/lib/syn" ;
+           if (system($cmd)) {}
+
+           $cmd  = 
+           "rmdir     ${home}/${design}_cmp/projects/${project}/ip/${component}/syn/${syn}/target/${target}" ;
+           if (system($cmd)) {}
+
+
+
+
+         }
+
+
+
+         }
+
+
+         }
+
+
+
+
+
+     my @children = qx(ls  ${home}/${design}/projects/${project}/children    );
+     foreach my $child (@children) 
+       {        
+        chomp($child);
+
+        print ("CHILD   $home/${design}/projects/${project}/children/${child}\n"   );
+
+        $cmd  = "mkdir   ${home}/${design}_cmp/projects/${project}/children/${child}/bin  " ;
+        if (system($cmd)) {die "Failed  ";}
+        $cmd  = "lndir -silent  ${home}/${design}/projects/${child}/bin  ${home}/${design}_cmp/projects/${project}/children/${child}/bin " ;
+        if (system($cmd)) {}
+
+
+        $cmd  = "mkdir   ${home}/${design}_cmp/projects/${project}/children/${child}/sw  " ;
+        if (system($cmd)) {die "Failed  ";}
+        $cmd  = "lndir -silent  ${home}/${design}/projects/${child}/sw  ${home}/${design}_cmp/projects/${project}/children/${child}/sw " ;
+        if (system($cmd)) {}
+
+
+
+
+        my @grand_children = qx(ls  ${home}/${design}/projects/${project}/children/${child}/ip    );
+        foreach my $grand_child (@grand_children) 
+         {
+          chomp($grand_child);
+          $cmd  = 
+          "lndir -silent ${home}/${design}/projects/${child}/ip/${grand_child}  ${home}/${design}_cmp/projects/${project}/children/${child}/ip/${grand_child}  " ;
+          if (system($cmd)) {die "Failed ";}
+         }
+
+        }
+
+     }
+
+
+
+
+
+1
+
+

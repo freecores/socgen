@@ -1,0 +1,16 @@
+initial
+ begin
+ $display("              ");
+ $display("          ===================================================");
+ $display("%8d  Test Start",$realtime/`PERIOD );
+ $display("          ===================================================");
+ $display("              ");
+ cg.next(12);
+ cg.reset_off;
+ cg.next(1300000);
+ cg.exit;
+end
+
+
+
+

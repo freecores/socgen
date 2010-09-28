@@ -1,0 +1,13 @@
+`define SYNTHESIS
+`define ROM_FILE "../../../../../../pic_micro/sw/loop/loop.abs12"
+`include         "../../../../../../pic_micro/sw/loop/ROM_defines.v"
+`define ROM_ADDR    11
+`define MODULE_NAME Basys_loop
+
+
+
+`define JTAG_USER1_WIDTH  8
+`define JTAG_USER1_RESET  8'h12
+
+`define JTAG_USER2_WIDTH  8
+`define JTAG_USER2_RESET  8'h00

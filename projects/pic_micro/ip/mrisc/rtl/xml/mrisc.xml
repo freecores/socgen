@@ -1,0 +1,59 @@
+<components>
+<component>
+   <name>mrisc</name>
+   <variant>mrisc</variant>
+
+
+      <library>
+          <child>
+            <name>cde_sram</name>
+            <parent>cde_sram</parent>
+            <family>cde</family>
+          </child>
+          <child>
+            <name>cde_sync_with_hysteresis</name>
+            <parent>cde_synchronizers</parent>
+            <family>cde</family>
+          </child>
+
+    </library>
+
+
+ <chips>
+          <chip>
+            <name>Basys_loop</name>
+            <target>Basys</target>
+    <children>
+          <child>
+            <name>disp_io</name>
+            <parent>disp_io</parent>
+            <family>logic</family>
+          </child>
+      </children>
+
+
+          </chip>
+      </chips>
+<sims>
+
+<sim><name>sanity1</name></sim>
+<sim><name>rf3</name></sim>
+<sim><name>sanity2</name></sim>
+<sim><name>rf2</name></sim>
+<sim><name>rf1</name></sim>
+<sim><name>ind_mem</name></sim>
+<sim><name>loop</name></sim>
+
+</sims>
+
+             <syn_children>
+          <child>
+            <name>disp_io</name>
+            <parent>disp_io</parent>
+            <family>logic</family>
+          </child>
+      </syn_children>
+
+
+</component>
+</components>

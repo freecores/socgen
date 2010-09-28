@@ -1,0 +1,238 @@
+
+
+
+
+wire [23:0]        micro_addr;
+wire [15:0]        micro_wdata;
+wire               micro_rd;
+wire               micro_wr;
+wire               micro_ub;
+wire               micro_lb;
+wire  [1:0]        micro_cs;
+wire               micro_ack;
+
+wire [15:0]         micro_rdata;
+
+wire  [23:1]       memadr_out;   
+wire               memoe_n_out;   
+wire               memdb_oe;
+wire  [15:0]       memdb_out;
+wire  [15:0]       memdb_in;
+wire  [15:0]       memdb_io;
+wire               memwr_n_out;
+wire               ramcs_n_out;  
+wire               ramlb_n_out;  
+wire               ramadv_out_n; 
+wire               ramclk_out;   
+wire               ramcre_out;   
+wire               ramub_n_out;  
+
+
+flash_memcontrl
+dut
+(
+    .clk           ( clk          ),
+    .reset         ( reset        ),
+
+    .addr          ( micro_addr[23:1]),
+    .wdata         ( micro_wdata  ),
+    .cs            ( micro_cs     ),
+    .stb           (|micro_cs     ),
+    .rd            ( micro_rd     ),
+    .wr            ( micro_wr     ),
+    .ub            ( micro_ub     ),
+    .lb            ( micro_lb     ),
+    .ack           ( micro_ack    ),
+    .rdata         ( micro_rdata  ),
+
+    .memadr_out    ( memadr_out   ),   
+    .memoe_n_out   ( memoe_n_out  ),   
+    .memdb_oe      ( memdb_oe     ),
+    .memdb_out     ( memdb_out    ),
+    .memdb_in      ( memdb_in     ),
+    .memwr_n_out   ( memwr_n_out  ),
+    .ramcs_n_out   ( ramcs_n_out  ),  
+    .ramlb_n_out   ( ramlb_n_out  ),  
+    .ramadv_out_n  ( ramadv_out_n ), 
+    .ramclk_out    ( ramclk_out   ),   
+    .ramcre_out    ( ramcre_out   ),   
+    .ramub_n_out   ( ramub_n_out  )    
+   );
+
+
+
+
+micro_bus16_model
+bus16
+ (
+    .clk           ( clk          ), 
+    .reset         ( reset        ),
+    .addr          ( micro_addr   ),
+    .wdata         ( micro_wdata  ),
+    .cs            ( micro_cs     ),
+    .rd            ( micro_rd     ),
+    .wr            ( micro_wr     ),
+    .ub            ( micro_ub     ),
+    .lb            ( micro_lb     ),
+    .rdata         ( micro_rdata  )
+);
+ 
+
+
+
+iobuftri memdb_buff_0
+  (
+   .i       (memdb_out[0] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[0]  ),
+   .pad     (memdb_io[0]  )
+   );
+
+iobuftri memdb_buff_1
+  (
+   .i       (memdb_out[1] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[1]  ),
+   .pad     (memdb_io[1]  )
+   );
+
+iobuftri memdb_buff_2
+  (
+   .i       (memdb_out[2] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[2]  ),
+   .pad     (memdb_io[2]  )
+   );
+
+iobuftri memdb_buff_3
+  (
+   .i       (memdb_out[3] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[3]  ),
+   .pad     (memdb_io[3]  )
+   );
+
+iobuftri memdb_buff_4
+  (
+   .i       (memdb_out[4] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[4]  ),
+   .pad     (memdb_io[4]  )
+   );
+
+iobuftri memdb_buff_5
+  (
+   .i       (memdb_out[5] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[5]  ),
+   .pad     (memdb_io[5]  )
+   );
+
+
+iobuftri memdb_buff_6
+  (
+   .i       (memdb_out[6] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[6]  ),
+   .pad     (memdb_io[6]  )
+   );
+
+iobuftri memdb_buff_7
+  (
+   .i       (memdb_out[7] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[7]  ),
+   .pad     (memdb_io[7]  )
+   );
+   
+iobuftri memdb_buff_8
+  (
+   .i       (memdb_out[8] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[8]  ),
+   .pad     (memdb_io[8]  )
+   );   
+   
+iobuftri memdb_buff_9
+  (
+   .i       (memdb_out[9] ),
+   .oe      (memdb_oe     ),
+   .o       (memdb_in[9]  ),
+   .pad     (memdb_io[9]  )
+   );   
+
+iobuftri memdb_buff_10
+  (
+   .i       (memdb_out[10] ),
+   .oe      (memdb_oe      ),
+   .o       (memdb_in[10]  ),
+   .pad     (memdb_io[10]  )
+   );
+
+
+iobuftri memdb_buff_11
+  (
+   .i       (memdb_out[11] ),
+   .oe      (memdb_oe      ),
+   .o       (memdb_in[11]  ),
+   .pad     (memdb_io[11]  )
+   );
+
+iobuftri memdb_buff_12
+  (
+   .i       (memdb_out[12] ),
+   .oe      (memdb_oe      ),
+   .o       (memdb_in[12]  ),
+   .pad     (memdb_io[12]  )
+   );
+
+iobuftri memdb_buff_13
+  (
+   .i       (memdb_out[13] ),
+   .oe      (memdb_oe      ),
+   .o       (memdb_in[13]  ),
+   .pad     (memdb_io[13]  )
+   );
+
+iobuftri memdb_buff_14
+  (
+   .i       (memdb_out[14] ),
+   .oe      (memdb_oe      ),
+   .o       (memdb_in[14]  ),
+   .pad     (memdb_io[14]  )
+   );
+   
+
+iobuftri memdb_buff_15
+  (
+   .i       (memdb_out[15] ),
+   .oe      (memdb_oe      ),
+   .o       (memdb_in[15]  ),
+   .pad     (memdb_io[15]  )
+   );
+
+
+pullup pu_ramwait ( ramwait_n );
+
+mt45w8mw12
+psram (
+    .clk    ( ramclk_out    ), 
+    .adv_n  ( ramadv_out_n  ),
+    .cre    ( ramcre_out    ), 
+    .o_wait ( ramwait_n     ),
+    .ce_n   ( ramcs_n_out   ),
+    .oe_n   ( memoe_n_out   ),
+    .we_n   ( memwr_n_out   ),
+    .lb_n   ( ramlb_n_out   ),
+    .ub_n   ( ramub_n_out   ),
+    .addr   ( memadr_out    ),
+    .dq     ( memdb_io      ) 
+); 
+
+
+
+
+
+ 
+
+

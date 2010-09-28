@@ -1,0 +1,11 @@
+`define     TIMEOUT     800000
+
+`define  ROM_WORDS 128 
+`define  ROM_ADD   7  
+`define  ROM_FILE "NONE"
+
+
+
+`define  PROG_ROM_WORDS 128 
+`define  PROG_ROM_ADD   7 
+`define  PROG_ROM_FILE "../../../../../../Mos6502/sw/io_poll_2/io_poll_2.abs16"

@@ -1,0 +1,12 @@
+
+initial
+   begin
+	$display ("\n\nMini-RISC. Sanity 2 Version 1.0\n\n");
+  	$display ("========== Starting  Test ========== \n");
+	repeat(10)	@(posedge clk);
+	cg.reset_off;
+   	repeat(4000)	@(posedge clk);
+cg.exit;
+   end
+
+

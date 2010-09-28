@@ -1,0 +1,136 @@
+
+
+wire          serial_txd;
+wire          serial_rxd;
+
+wire    [7:0]   alu_status;
+
+wire    [23:1]  ext_add;
+wire    [15:0]  ext_wdata;
+wire    [15:0]  ext_rdata;
+wire            ext_ub;
+wire            ext_lb;
+wire            ext_rd;
+wire            ext_wr;
+wire   [1:0]    ext_cs;
+
+
+wire  [7:0]   gpio_0_out;
+wire  [7:0]   gpio_1_out;
+
+wire          ps2_clk_in;   
+wire          ps2_data_in;  
+wire          ps2_clk_oe;   
+wire          ps2_data_oe;  
+
+
+wire          ps2_clk;   
+wire          ps2_data;  
+
+
+
+
+T6502
+
+#(.ROM_WORDS(`ROM_WORDS),
+  .ROM_ADD  (`ROM_ADD),
+  .ROM_FILE (`ROM_FILE),
+
+  .PROG_ROM_WORDS(`PROG_ROM_WORDS),
+  .PROG_ROM_ADD  (`PROG_ROM_ADD),
+  .PROG_ROM_FILE (`PROG_ROM_FILE)
+
+
+ )
+
+dut
+(
+     .clk          ( clk          ),	
+     .reset        ( reset        ),
+     .alu_status   ( alu_status   ), 
+     .ext_irq_in   ( 4'b0000      ),
+     .ext_add      ( ext_add      ),
+     .ext_wdata    ( ext_wdata    ), 
+     .ext_rdata    ( 16'h0000     ),
+     .ext_ub       ( ext_ub       ),
+     .ext_lb       ( ext_lb       ),
+     .ext_rd       ( ext_rd       ),
+     .ext_wr       ( ext_wr       ),
+     .ext_cs       ( ext_cs       ),
+
+     .gpio_0_out   ( gpio_0_out   ),
+     .gpio_0_in    ( gpio_0_out   ),
+     .gpio_0_oe    (              ),
+     .gpio_0_lat   (              ),
+
+     .gpio_1_out   ( gpio_1_out   ),
+     .gpio_1_in    ( gpio_1_out   ),
+     .gpio_1_oe    (              ),
+     .gpio_1_lat   (              ),
+
+     .ps2_clk_oe   ( ps2_clk_oe   ),
+     .ps2_clk_in   ( ps2_clk_in   ),
+     .ps2_data_oe  ( ps2_data_oe  ),
+     .ps2_data_in  ( ps2_data_in  ),
+
+     .txd_pad_out  ( serial_txd   ),
+     .rxd_pad_in   ( serial_rxd   ),
+     .cts_pad_in   ( loop         ),
+     .rts_pad_out  ( loop         )
+);
+
+
+
+
+
+
+
+iobuftri
+data_tri_buf
+  (
+   .i   ( 1'b0        ),
+   .oe  ( ps2_data_oe ),
+   .o   ( ps2_data_in ),
+   .pad ( ps2_data    )
+   );
+
+
+iobuftri
+clk_tri_buf
+  (
+   .i   ( 1'b0       ),
+   .oe  ( ps2_clk_oe ),
+   .o   ( ps2_clk_in ),
+   .pad ( ps2_clk    )
+   );
+
+
+
+pullup ua0(ps2_clk);
+pullup ua1(ps2_data);
+
+
+ps2_model 
+#(.CLKCNT(10'h177))
+ps2_model
+(
+   .clk                    ( clk              ),
+   .reset                  ( reset            ), 
+   .ps2_clk                ( ps2_clk          ),
+   .ps2_data               ( ps2_data         )
+
+
+
+);
+
+
+
+
+
+ uart_model     #(.CLKCNT(4'hc))
+ uart_model (
+             .clk            ( clk           ),
+             .reset          ( reset         ),
+             .txd_in         ( serial_txd    ),
+             .rxd_out        ( serial_rxd    )
+        );

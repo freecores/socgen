@@ -1,0 +1,66 @@
+
+
+
+wire [15:0] addr_pin;
+
+wire [7:0]  gpio_0_out;
+wire [7:0]  gpio_1_out;
+
+wire        serial_txd;
+wire        serial_rxd;
+
+
+
+T6502 
+    #(.ROM_WORDS       (`ROM_WORDS),
+      .ROM_ADD         (`ROM_ADD),
+      .ROM_FILE        (`ROM_FILE),
+      .PROG_ROM_WORDS  (`PROG_ROM_WORDS),
+      .PROG_ROM_ADD    (`PROG_ROM_ADD),
+      .PROG_ROM_FILE   (`PROG_ROM_FILE),
+      .RAM_WORDS       (4096)
+       )  dut  (
+         .clk          ( clk             ),
+         .reset        ( reset           ),
+
+         .ext_irq_in   ( 4'h0            ),
+
+         .gpio_0_out   ( gpio_0_out      ),
+         .gpio_0_in    ( gpio_0_out      ),
+         .gpio_0_oe    (                 ),
+         .gpio_0_lat   (                 ),
+
+         .gpio_1_out   ( gpio_1_out      ),
+         .gpio_1_in    ( gpio_1_out      ),
+         .gpio_1_oe    (                 ),
+         .gpio_1_lat   (                 ),
+
+         .ps2_clk_oe   (                 ),
+         .ps2_clk_in   (  1'b1           ),
+         .ps2_data_oe  (                 ),
+         .ps2_data_in  (  1'b1           ),
+
+
+         .txd_pad_out  ( serial_txd ),
+         .rxd_pad_in   ( serial_rxd ),
+         .cts_pad_in   ( loop   ),
+         .rts_pad_out  ( loop   )
+
+
+
+
+
+);
+
+
+
+
+
+uart_model     #(.CLKCNT(4'hc))
+uart_model (
+             .clk            ( clk           ),
+             .reset          ( reset         ),
+             .txd_in         ( serial_txd    ),
+             .rxd_out        ( serial_rxd    )
+        );
+

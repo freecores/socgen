@@ -1,0 +1,4 @@
+`include "../../../rtl/gen/syn/mrisc.v"
+`include "../../lib/cde_sram/cde_sram.v"
+
+

@@ -1,0 +1,14 @@
+`define SYNTHESIS
+`define ROM_FILE "../../../../../../pic_micro/sw/mouse/mouse.abs12"
+`include         "../../../../../../pic_micro/sw/mouse/ROM_defines.v"
+`define ROM_ADDR    11
+`define MODULE_NAME Nexys2_mouse_mrisc
+
+
+
+`define JTAG_USER1_WIDTH  8
+`define JTAG_USER1_RESET  8'h12
+`define JTAG_USER1_UPDR   1'b1
+`define JTAG_USER2_WIDTH  8
+`define JTAG_USER2_RESET  8'h34
+`define JTAG_USER2_UPDR   1'b1

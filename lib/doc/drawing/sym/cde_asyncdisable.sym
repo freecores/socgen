@@ -1,0 +1,48 @@
+v 20100214 2
+B 300 0 3400 1100 3 60 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 400 1250 5 10 1 1 0 0 1
+device=cde_asyncdisable
+T 400 1450 8 10 1 1 0 0 1
+refdes=U?
+P 300 200 0 200 10 1 1
+{
+T 400 200 5 10 1 1 0 1 1
+pinnumber=sync_reset[WIDTH-1:0]
+T 400 200 5 10 0 1 0 1 1
+pinseq=1
+}
+P 300 700 0 700 4 0 1
+{
+T 400 700 5 10 1 1 0 1 1
+pinnumber=reset_n
+T 400 700 5 10 0 1 0 1 1
+pinseq=2
+}
+P 300 900 0 900 4 0 1
+{
+T 400 900 5 10 1 1 0 1 1
+pinnumber=reset
+T 400 900 5 10 0 1 0 1 1
+pinseq=3
+}
+P 300 500 0 500 4 0 1
+{
+T 400 500 5 10 1 1 0 1 1
+pinnumber=atg_asyncdisable
+T 400 500 5 10 0 1 0 1 1
+pinseq=4
+}
+P 3700 900 4000 900 10 1 1
+{
+T 3600 900 5 10 1 1 0 7 1
+pinnumber=reset_out[WIDTH-1:0]
+T 3600 900 5 10 0 1 0 7 1
+pinseq=5
+}
+P 3700 700 4000 700 10 1 1
+{
+T 3600 700 5 10 1 1 0 7 1
+pinnumber=reset_n_out[WIDTH-1:0]
+T 3600 700 5 10 0 1 0 7 1
+pinseq=6
+}

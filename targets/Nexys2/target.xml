@@ -1,0 +1,23 @@
+<targets>
+<target>
+<name>NEXYS2</name>
+      <children>
+          <child>
+            <name>disp_io</name>
+            <parent>disp_io</parent>
+            <family>logic</family>
+          </child>
+          <child>
+            <name>flash_memcontrl</name>
+            <parent>flash_memcontrl</parent>
+            <family>logic</family>
+          </child>
+          <child>
+            <name>usb_epp</name>
+            <parent>usb_epp</parent>
+            <family>logic</family>
+          </child>
+      </children>
+
+</target>
+</targets>

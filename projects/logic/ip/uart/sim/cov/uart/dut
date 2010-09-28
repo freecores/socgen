@@ -1,0 +1,54 @@
+
+wire        host_parity_enable      ;
+
+wire        host_txd_parity         ;
+wire        host_txd_force_parity   ;
+wire [7:0]  host_txd_data_in        ;
+wire        host_txd_buffer_empty   ;
+wire        host_txd_load           ;
+wire        host_txd_break          ;
+
+wire        host_rxd_parity         ;
+wire        host_rxd_force_parity   ;
+wire [7:0]  host_rxd_data_out       ;
+wire        host_rxd_data_avail     ;
+wire        host_rxd_data_avail_stb ;
+wire        host_rxd_stop_error     ;
+wire        host_rxd_parity_error   ;
+wire        host_rx_data_avail      ;
+
+
+uart
+#(
+  .RX_FIFO(1),
+  .RX_FIFO_SIZE(4),
+  .RX_FIFO_WORDS(16),
+  .TX_FIFO(1),
+  .TX_FIFO_SIZE(3),
+  .TX_FIFO_WORDS(8))
+ dut(
+         .clk                 ( clk                     ),
+         .reset               ( reset                   ),
+         .parity_enable       ( host_parity_enable      ),
+         .divider_in          ( 4'b0000                 ),
+         .txd_parity          ( host_txd_parity         ),
+         .txd_force_parity    ( host_txd_force_parity   ),
+         .txd_data_in         ( host_txd_data_in        ),
+         .txd_buffer_empty    ( host_txd_buffer_empty   ),
+         .txd_load            ( host_txd_load           ),
+         .txd_break           ( host_txd_break          ),
+         .rxd_parity          ( host_rxd_parity         ),
+         .rxd_force_parity    ( host_rxd_force_parity   ),
+         .rxd_data_out        ( host_rxd_data_out       ),
+         .rxd_stop_error      ( host_rxd_stop_error     ),
+         .rxd_parity_error    ( host_rxd_parity_error   ),
+         .rxd_data_avail      ( host_rxd_data_avail     ),
+         .rxd_data_avail_stb  ( host_rxd_data_avail_stb ),
+         .txd_pad_out         ( serial_txd              ),
+         .rxd_pad_in          ( serial_rxd              ),
+         .cts_pad_in          ( 1'b0                    ),
+         .rts_pad_out         (                         ),
+         .cts_out             (                         ),
+         .rts_in              ( 1'b0                    )
+);
+

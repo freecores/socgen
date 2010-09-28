@@ -1,0 +1,15 @@
+initial
+begin
+$display("              ");
+$display("              ===================================================");
+$display("              Test Start");
+$display("              ===================================================");
+$display("              ");
+cg.next(20);
+while (gpio_0_out != 8'h00) cg.next(1);
+cg.reset_off;
+while (gpio_1_out == 8'hff) cg.next(10);
+cg.next(50000);
+cg.exit;
+end
+

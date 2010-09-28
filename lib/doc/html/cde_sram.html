@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>start</title>
+  <meta name="GENERATOR" content="OpenOffice.org 3.0  (Linux)">
+  <meta name="CREATED" content="0;0">
+  <meta name="CHANGED" content="20090513;8521600">
+  <meta name="KEYWORDS" content="start">
+  <meta name="Info 3" content="">
+  <meta name="Info 4" content="">
+  <meta name="date" content="2008-01-08T12:01:41-0500">
+  <meta name="robots" content="index,follow">
+</head>
+<body dir="ltr" lang="en-US">
+<h1><a name="cde_sram"></a>SOCGEN Datasheet:<br>
+</h1>
+<div id="toc__header" dir="ltr">
+<p><br>
+</p>
+</div>
+<div id="toc__inside" dir="ltr">
+<ul>
+  <li>
+    <p style="margin-bottom: 0in;"><a href="#cde_sram">cde_sram<br>
+    </a></p>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Description">Description<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Parameters">Parameters<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Interface">Interface<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Theoryofoperation">Theory
+of Operation<br>
+        </a></p>
+      </li>
+      <li>
+        <p><a href="../../cde_sram/cde_sram.v">Source Code <br>
+        </a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+<h1><br>
+</h1>
+<br>
+<img style="width: 640px; height: 480px;" alt=""
+ src="../png/cde_sram.png"><br>
+<b><br>
+<br>
+</b>
+<h2><b><a name="Description"></a>Description</b></h2>
+Cde_sram is a generic model for a synchronous ram with seperate read
+and write ports<br>
+<br>
+<br>
+<br>
+<h2><b><a name="Parameters"></a>Parameters<br>
+</b></h2>
+<table style="text-align: left; width: 500px; height: 120px;" border="8"
+ cellpadding="4" cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Name<br>
+      </td>
+      <td style="vertical-align: top;">default <br>
+      </td>
+      <td style="vertical-align: top;">Description<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">ADDR<br>
+      </td>
+      <td style="vertical-align: top;">10<br>
+      </td>
+      <td style="vertical-align: top;">Address bus width<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">WIDTH<br>
+      </td>
+      <td style="vertical-align: top;">8<br>
+      </td>
+      <td style="vertical-align: top;">Data bus width<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">WORDS<br>
+      </td>
+      <td style="vertical-align: top;">1024<br>
+      </td>
+      <td style="vertical-align: top;">Number of words of memory<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">WRITETHRU<br>
+      </td>
+      <td style="vertical-align: top;">0<br>
+      </td>
+      <td style="vertical-align: top;">During read/write to the same
+address, 0 reads old data, 1 reads new<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">DEFAULT<br>
+      </td>
+      <td style="vertical-align: top;">{WIDTH{1'b1}}<br>
+      </td>
+      <td style="vertical-align: top;">Read Data value when not reading<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">INIT_FILE<br>
+      </td>
+      <td style="vertical-align: top;">"NONE"<br>
+      </td>
+      <td style="vertical-align: top;">Filename for initialization data<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<b><br>
+<br>
+</b>
+<p><b><b><br>
+</b></b></p>
+<p><b><b><br>
+</b></b></p>
+<p><br>
+</p>
+<p><b><b><br>
+</b></b></p>
+<p><b><b><br>
+<br>
+</b></b></p>
+<h2><b><b><a name="Interface"></a>Interface</b><b>&nbsp;<br>
+</b></b></h2>
+<p style="margin-bottom: 0in;"></p>
+<table style="text-align: left; width: 366px; height: 152px;" border="8"
+ cellpadding="4" cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">NAME<br>
+      </td>
+      <td style="vertical-align: top;">Type<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> clk<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> clock input<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> cs<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> chip select active high<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> waddr[]<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> write address bus<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> raddr[]<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> read address bus<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> wr<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> write enable<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> rd<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> read enable<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> wdata[]<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> write data bus<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> rdata[]<br>
+      </td>
+      <td style="vertical-align: top;"> output<br>
+      </td>
+      <td style="vertical-align: top;"> read data bus<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2><b><a name="Theoryofoperation"></a>Theory of Operation<br>
+</b></h2>
+This module contains a generic synchronous ram that will be replaced if
+the design target requires it<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

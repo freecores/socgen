@@ -1,0 +1,99 @@
+
+
+initial
+ begin
+ $display("              ");
+ $display("          ===================================================");
+ $display("%t    Start Test  ",$realtime );
+ $display("          ===================================================");
+ $display("              ");
+
+
+ fork
+ begin
+
+ cg.next(12);
+ cg.reset_off;
+ cg.next(88);
+ uart_host.txd_parity <= 1'b1;
+ uart_host.rxd_parity <= 1'b1;
+ uart_host.parity_enable <= 1'b1;
+ uart_host.send_byte(8'h12);
+ cg.next(30);
+ uart_host.send_byte(8'h34);
+ cg.next(30);
+ uart_host.send_byte(8'h56);
+ cg.next(30);
+ uart_host.send_byte(8'h78);
+ cg.next(30);
+ uart_host.send_byte(8'h9a);
+ cg.next(30);
+ uart_host.send_byte(8'hbc);
+ cg.next(30);
+ uart_host.send_byte(8'hde);
+ cg.next(30);
+ uart_host.send_byte(8'hf0);
+ cg.next(30);
+ uart_host.send_byte(8'h12);
+ cg.next(30);
+ uart_host.send_byte(8'h34);
+ cg.next(100);
+ uart_host.rcv_byte(8'h66);
+ cg.next(100);
+
+ uart_host.rcv_byte(8'h12);
+ cg.next(100);
+
+ uart_host.rcv_byte(8'h34);
+ cg.next(100);
+
+ uart_host.rcv_byte(8'h56);
+ cg.next(100);
+
+  end
+
+
+ begin
+ cg.next(20);
+ uart_model.rx_parity_enable  <= 1'b1;
+ uart_model.txd_parity_enable <= 1'b1;
+ uart_model.rx_parity         <= 1'b1;
+ uart_model.txd_parity        <= 1'b1;
+
+ cg.next(10);
+ uart_model.rcv_byte(8'h12);
+ cg.next(10);
+ uart_model.rcv_byte(8'h34);
+ cg.next(10);
+ uart_model.rcv_byte(8'h56);
+ cg.next(10);
+ uart_model.rcv_byte(8'h78);
+ cg.next(10);
+ uart_model.rcv_byte(8'h9a);
+ cg.next(10);
+ uart_model.rcv_byte(8'hbc);
+ cg.next(10);
+ uart_model.rcv_byte(8'hde);
+ cg.next(10);
+ uart_model.rcv_byte(8'hf0);
+ cg.next(10);
+ uart_model.rcv_byte(8'h12);
+ cg.next(10);
+ uart_model.rcv_byte(8'h34);
+ cg.next(100);
+ uart_model.send_byte(8'h66);
+ cg.next(100);
+ uart_model.send_byte(8'h12);
+ cg.next(100);
+ uart_model.send_byte(8'h34);
+ cg.next(100);
+ uart_model.send_byte(8'h56);
+ end
+
+ join
+ cg.exit;
+end
+
+
+
+

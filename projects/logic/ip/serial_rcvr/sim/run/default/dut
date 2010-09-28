@@ -1,0 +1,44 @@
+
+ reg              edge_enable; 
+ reg              parity_enable;
+ reg              parity_type; 
+ reg              parity_force; 
+ reg              start_value;
+ reg              stop_value;
+
+ reg              rcv_stb;
+ reg              pad_in;
+
+
+ wire   [7:0]     data_out;
+
+ wire             data_avail;  
+ wire             parity_error;  
+ wire             stop_error;  
+
+
+
+
+serial_rcvr
+ dut(
+         .clk                 ( clk           ),
+         .reset               ( reset         ),
+         .edge_enable         ( edge_enable   ), 
+         .parity_enable       ( parity_enable ),
+         .parity_type         ( parity_type   ),
+         .parity_force        ( parity_force  ),
+         .start_value         ( start_value   ),
+         .stop_value          ( stop_value    ),
+ 
+         .pad_in              ( pad_in        ),
+         .rcv_stb             ( rcv_stb       ),
+         .data_out            ( data_out      ),
+         .parity_error        ( parity_error  ),
+         .stop_error          ( stop_error    ),
+         .data_avail          ( data_avail    ) 
+);
+
+
+
+
+

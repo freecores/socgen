@@ -1,0 +1,8 @@
+fizzim is a state machine generation tool
+
+it was downloaded from www.fizzim.com
+
+it is not the same as www.fizzim.sourceforge.net
+
+fizzim requires java to create state machine files and perl to create verilog code
+

@@ -1,0 +1,58 @@
+initial
+ begin
+ $display("              ");
+ $display("          ===================================================");
+ $display("%t  Test Start",$realtime);
+ $display("          ===================================================");
+ $display("              ");
+
+ cg.next(20);
+ cg.reset_off;
+ cg.next(10);
+
+
+ bus.u_write(16'h8001, 8'h11);
+ bus.u_write(16'h8002, 8'h22);
+ bus.u_write(16'h8001, 8'hff);
+ bus.u_write(16'h8002, 8'haa);
+ bus.u_write(16'h8012, 8'h0f);
+ bus.u_write(16'h8014, 8'h0e);
+ bus.u_write(16'h8022, 8'h0d);
+ bus.u_write(16'h8024, 8'h0c);
+ bus.u_write(16'h8030, 8'h0b);
+ bus.u_write(16'h8031, 8'h0a);
+ bus.u_write(16'h8032, 8'h09);
+
+
+ bus.u_cmp(16'h8000, 8'haa);
+ cg.next(1);
+ bus.u_cmp(16'h8001, 8'hff);
+ cg.next(1);
+ bus.u_cmp(16'h8002, 8'haa);
+ cg.next(1);
+ bus.u_cmp(16'h8012, 8'h00);
+ cg.next(1);
+ bus.u_cmp(16'h8014, 8'h00);
+ bus.u_cmp(16'h8022, 8'h00);
+ bus.u_cmp(16'h8024, 8'h0c);
+ bus.u_cmp(16'h8030, 8'h00);
+ bus.u_cmp(16'h8031, 8'h00);
+ bus.u_cmp(16'h8032, 8'h09);
+
+
+
+
+ cg.next(1000);
+
+
+
+
+cg.exit;
+end
+
+
+
+
+
+
+

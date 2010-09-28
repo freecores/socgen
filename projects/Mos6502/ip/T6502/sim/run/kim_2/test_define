@@ -1,0 +1,47 @@
+initial
+begin
+$display("              ");
+$display("              ===================================================");
+$display("              Test Start");
+$display("              ===================================================");
+$display("              ");
+cg.next(20);
+cg.reset_off;
+fork
+begin
+end
+
+begin
+cg.next(400000);
+
+uart_model.send_byte(8'h34); 
+cg.next(10000);
+
+uart_model.send_byte(8'h30); 
+cg.next(10000);
+uart_model.send_byte(8'h30); 
+cg.next(10000);
+uart_model.send_byte(8'h31); 
+cg.next(10000);
+uart_model.send_byte(8'h20); 
+cg.next(10000);
+uart_model.send_byte(8'h38);
+cg.next(10000);
+uart_model.send_byte(8'h36);  
+cg.next(10000);
+uart_model.send_byte(8'h2e); 
+
+
+
+
+
+cg.next(80000);             
+
+end
+join
+
+cg.exit;
+end
+
+
+

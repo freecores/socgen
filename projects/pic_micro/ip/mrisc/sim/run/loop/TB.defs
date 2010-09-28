@@ -1,0 +1,11 @@
+`define  ROM_WORDS 2048 
+`define  ROM_ADDR   11  
+`define  ROM_WIDTH  12  
+`define  ROM_FILE "../../../../../sw/loop/loop.abs12"
+`define  TIMEOUT  2000000
+
+
+
+
+
+

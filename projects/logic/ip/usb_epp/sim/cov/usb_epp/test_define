@@ -1,0 +1,21 @@
+initial
+ begin
+ $display("              ");
+ $display("          ===================================================");
+ $display("%t  Test Start",$realtime);
+ $display("          ===================================================");
+ $display("              ");
+
+
+ cg.next(1000);
+
+
+ cg.exit;
+end
+
+
+
+
+
+
+

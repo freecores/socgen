@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>start</title>
+  <meta name="GENERATOR" content="OpenOffice.org 3.0  (Linux)">
+  <meta name="CREATED" content="0;0">
+  <meta name="CHANGED" content="20090513;8521600">
+  <meta name="KEYWORDS" content="start">
+  <meta name="Info 3" content="">
+  <meta name="Info 4" content="">
+  <meta name="date" content="2008-01-08T12:01:41-0500">
+  <meta name="robots" content="index,follow">
+</head>
+<body dir="ltr" lang="en-US">
+<h1><a name="cde_sync_with_hysteresis"></a>SOCGEN Datasheet:<br>
+</h1>
+<div id="toc__inside" dir="ltr">
+<ul>
+  <li>
+    <p style="margin-bottom: 0in;"><a href="#cde_sync_with_hysteresis">cde_sync_with_hysteresis<br>
+    </a></p>
+    <ul>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Description">Description<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Parameters">Parameters<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Interface">Interface<br>
+        </a></p>
+      </li>
+      <li>
+        <p style="margin-bottom: 0in;"><a href="#Theoryofoperation">Theory
+of Operation<br>
+        </a></p>
+      </li>
+      <li>
+        <p><a href="../../cde_synchronizers/cde_sync_with_hysteresis.v">Source
+Code <br>
+        </a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+<h1><br>
+</h1>
+<br>
+<img style="width: 640px; height: 480px;" alt=""
+ src="../png/cde_sync_with_hysteresis.png"><br>
+<b><br>
+<br>
+</b>
+<h2><b><a name="Description"></a>Description</b></h2>
+This module will filter a noisy signal by waiting until it is stable
+for a preset number of clocks before switching it's output.<br>
+<br>
+<br>
+<br>
+<h2><b><a name="Parameters"></a>Parameters<br>
+</b></h2>
+<table style="text-align: left; width: 500px; height: 120px;" border="8"
+ cellpadding="4" cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Name<br>
+      </td>
+      <td style="vertical-align: top;">default <br>
+      </td>
+      <td style="vertical-align: top;">Description of what it does<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">WIDTH<br>
+      </td>
+      <td style="vertical-align: top;">1<br>
+      </td>
+      <td style="vertical-align: top;">sets the vector width of the data<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">DEBOUNCE_<br>
+      </td>
+      <td style="vertical-align: top;">4<br>
+      </td>
+      <td style="vertical-align: top;">sets the size of the debounce
+counter 2^DEBOUNCE-1<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">DEBOUNCE_DELAY<br>
+      </td>
+      <td style="vertical-align: top;">4'b1111<br>
+      </td>
+      <td style="vertical-align: top;">sets the number of clocks that
+the input data must be stable before the output will switch<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<b><br>
+<br>
+</b>
+<p><b><b><br>
+</b></b></p>
+<p><b><b><br>
+</b></b></p>
+<p><br>
+</p>
+<p><b><b><br>
+</b></b></p>
+<p><b><b><br>
+<br>
+</b></b></p>
+<h2><b><b><a name="Interface"></a>Interface</b><b>&nbsp;<br>
+</b></b></h2>
+<p style="margin-bottom: 0in;"></p>
+<table style="text-align: left; width: 366px; height: 152px;" border="8"
+ cellpadding="4" cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">NAME<br>
+      </td>
+      <td style="vertical-align: top;">Type<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> clk<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> clock input <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> reset<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> active high input for
+synchronous reset/load <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> data_in<br>
+      </td>
+      <td style="vertical-align: top;"> input<br>
+      </td>
+      <td style="vertical-align: top;"> data input <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> data_out<br>
+      </td>
+      <td style="vertical-align: top;"> output<br>
+      </td>
+      <td style="vertical-align: top;"> data output <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> data_rise<br>
+      </td>
+      <td style="vertical-align: top;"> output<br>
+      </td>
+      <td style="vertical-align: top;"> data output went from 0 -&gt;1 <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> data_fall<br>
+      </td>
+      <td style="vertical-align: top;"> output<br>
+      </td>
+      <td style="vertical-align: top;"> data output went from 1 -&gt;0 <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2><b><a name="Theoryofoperation"></a>Theory of Operation<br>
+</b></h2>
+cde_sync_with_hysteresis will filter a noisy signal by waiting until
+the input data stays at a constant value before passing that value to
+the output. Once it switches then any new value change must remain
+stable for the same period before it will switch again. This imposes a
+fixed delay on data passing through the filter.
+Reset is a synchronous operation that resets the debounce counter and
+preloads the current input into the hysteresis storage. Once out of
+reset any input change must be stable for the debounce delay before it
+is passed through.
+The data is processed as a group. DO NOT combine independent unrelated
+inputs into a vector as noise on one bit will affect the output of
+others.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

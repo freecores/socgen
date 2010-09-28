@@ -1,0 +1,8 @@
+`include "../../../rtl/gen/syn/soc_mouse.v"
+`include "../../../../pic16c5x/rtl/gen/syn/pic16c5x.v"
+`include "../../../../../children/logic/ip/io_module/rtl/gen/syn/io_module_mouse.v"
+`include "../../../../../children/logic/ip/ps2_interface/rtl/gen/syn/ps2_interface.v"
+`include "../../../../../children/logic/ip/uart/rtl/gen/syn/uart.v"
+`include "../../lib/cde_sram/cde_sram.v"
+`include "../../lib/cde_lifo/cde_lifo.v"
+`include "../../lib/cde_synchronizers/cde_sync_with_hysteresis.v"

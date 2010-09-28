@@ -1,0 +1,3 @@
+`include  "../../bench/verilog/models/clock_gen.v"
+`include  "../../bench/verilog/models/uart_model.v"
+`include  "../../bench/verilog/models/io_probe.v"

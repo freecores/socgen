@@ -1,0 +1,16 @@
+<components>
+<component>
+   <name>T6502_alu_logic</name>
+   <variant>T6502_alu_logic</variant>
+      
+
+      <sims>
+          <sim>
+            <name>alu_logic_test</name>
+          </sim>
+      </sims>
+
+
+     
+</component>
+</components>

@@ -1,0 +1,8 @@
+verilog work    ./target/Pad_Ring.v
+verilog work    ./target/lib/syn/cde_pads/cde_pad_se_dig.v
+verilog work    ./target/lib/syn/cde_clock_sys/cde_clock_sys.v
+verilog work    ./target/lib/syn/cde_jtag/cde_jtag.v
+verilog work    ./target/lib/syn/cde_jtag/cde_jtag_rpc_reg.v
+
+
+

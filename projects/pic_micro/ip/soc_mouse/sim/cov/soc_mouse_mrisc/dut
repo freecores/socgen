@@ -1,0 +1,79 @@
+
+
+
+
+
+wire         device_rx_read;
+wire [7:0]   device_rx_data;
+wire         device_rx_parity;
+wire         ps2_data_pad_oe;
+wire         ps2_data_pad_in;
+wire         ps2_data;
+wire         ps2_clk_pad_oe;
+wire         ps2_clk_pad_in;
+wire         ps2_clk;
+
+
+
+wire [7:0]     portaout;
+wire [7:0]     portbout;
+wire [7:0]     portcout;
+
+
+wire [9:0]     y_pos;
+wire [9:0]     x_pos;
+wire           new_packet;
+wire           ms_mid; 
+wire           ms_right;  
+wire           ms_left;  
+
+
+
+wire           txd_pad_out;
+wire           rxd_pad_in;
+wire           cts_pad_in;
+wire           rts_pad_out;  
+
+
+// Instantiate one CPU to be tested.
+soc_mouse_mrisc
+#(
+.ROM_WORDS ( `ROM_WORDS ), 
+.ROM_ADDR  ( `ROM_ADDR  ),  
+.ROM_WIDTH ( `ROM_WIDTH ), 
+.ROM_FILE  ( `ROM_FILE  )
+)
+dut(
+   .clk		( clk         ),
+   .reset	( reset       ),
+
+   .ps2_data_pad_in ( ps2_data_pad_in ),
+   .ps2_clk_pad_in  ( ps2_clk_pad_in  ),
+
+   .ps2_data_pad_oe ( ps2_data_pad_oe ),
+   .ps2_clk_pad_oe  ( ps2_clk_pad_oe  ),
+
+
+   .portaout    ( portaout    ),
+   .portbout    ( portbout    ),
+   .portcout    ( portcout    ),
+
+
+   .y_pos       ( y_pos       ),
+   .x_pos       ( x_pos       ),
+   .new_packet  ( new_packet  ),
+   .ms_mid      ( ms_mid      ), 
+   .ms_right    ( ms_right    ),  
+   .ms_left     ( ms_left     ),  
+
+
+
+   .txd_pad_out ( loop1       ),
+   .rxd_pad_in  ( loop1       ),
+   .cts_pad_in  ( loop2       ),
+   .rts_pad_out ( loop2       )  
+
+   );
+
+
+

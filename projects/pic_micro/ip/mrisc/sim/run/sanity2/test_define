@@ -1,0 +1,32 @@
+
+initial
+   begin
+	$display ("\n\nMini-RISC. Sanity 2 Version 1.0\n\n");
+  	$display ("========== Starting  Test ========== \n");
+	repeat(10)	@(posedge clk);
+	cg.reset_off;
+   
+
+	while(porta == 8'hFF)	@(posedge clk);
+	while(porta == 8'h00)	@(posedge clk);
+	
+	if(porta == 8'h01)
+	   begin
+	   end
+	else
+	if(porta == 8'hff)
+	   begin
+		$display("Test  FAILED in test %d !!!",  portb);
+	   end
+	else
+		$display("Test  status UNKNOWN (%h test: %d) !!!",  porta, portb);
+
+
+	repeat(4)	@(posedge clk);
+	$display("\n=============================================\n\n\n");
+
+	
+cg.exit;
+   end
+
+

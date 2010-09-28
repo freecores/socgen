@@ -1,0 +1,6 @@
+`include  "../../bench/verilog/models/clock_gen.v"
+`include  "../../bench/verilog/models/timing_gen.v"
+`include  "../../bench/verilog/models/ic_test_probe.v"
+`include  "../../bench/verilog/models/timed_driver.v"
+`include  "../../bench/verilog/models/timed_tester.v"
+

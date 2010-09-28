@@ -1,0 +1,25 @@
+[timestart] 55709
+[size] 1694 1099
+[pos] 74 4
+*-8.000000 56504 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TB.
+[treeopen] TB.dut.
+[treeopen] TB.dut.core.
+@22
+TB.dut.addr_pin[15:0]
+@28
+TB.dut.irq_in
+@820
+TB.dut.core.A_cmd[63:0]
+@28
+TB.dut.core.inst_decode.now_fetch_op
+@820
+TB.dut.core.A_instr[55:0]
+TB.dut.core.A_state[79:0]
+@22
+TB.dut.core.prog_counter[15:0]
+TB.dut.core.prog_data[15:0]
+@28
+TB.dut.core.stk_push
+@22
+TB.dut.core.stk_push_data[15:0]

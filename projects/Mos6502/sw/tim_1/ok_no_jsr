@@ -1,0 +1,411 @@
+
+	
+       cpu 6502
+       output HEX
+       dummy
+
+io_base        = $8000 ;
+
+io_gpio_0      = $02    ;
+io_gpio_1      = $06    ;
+
+io_tim0_start  = $10    ;
+io_tim0_end    = $12    ;
+
+io_tim1_start  = $20    ;
+io_tim1_end    = $22    ;
+
+io_uart_xmt    = $30    ;
+io_uart_rcv    = $32    ;	
+io_uart_cnt    = $34    ;	
+io_uart_stat   = $36    ;
+
+
+io_pic_int     = $40    ;	
+io_pic_irq_en  = $42    ;	
+io_pic_nmi_en  = $44    ;	
+io_pic_irq_ac  = $46    ;	
+io_pic_nmi_ac  = $48    ;	
+
+io_ps2_xmit    = $50    ;	
+io_ps2_rcv     = $52    ;	
+io_ps2_stat    = $54    ;	
+io_ps2_cntrl   = $56    ;	
+io_ps2_xpos    = $58    ;	
+io_ps2_ypos    = $5a    ;	
+	
+address       = $00
+
+	
+	
+	     * = $f800  ; assemble start
+               code
+
+.str_1          ASC    "Mem  " ;
+                DB   $00		;	
+
+.put_c          pha
+.put_cl	        lda io_base+io_pic_int
+	           and #$08
+                   beq .put_cl
+	           pla
+                   sta io_base+io_uart_xmt
+                   rts 
+	
+.prtbyt            pha
+	           lsr a
+	           lsr a
+	           lsr a
+	           lsr a
+	           jsr  .hexta
+	           pla  
+
+.hexta             and #$0f
+	           cmp #$0a
+	           clc
+	           bmi .hexta1
+	           adc #$07
+.hexta1            adc #$30
+	           jmp .put_c
+	
+
+.delay             lda #$ff
+	           clc
+	           adc #$01
+ 	           bne .delay
+	           rts
+
+
+
+   
+
+.start             lda #$ff
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f0           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f0
+                   lda io_base+io_ps2_rcv
+ 	           nop
+ 	           jsr .delay	          
+	
+.loop_aa           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_aa
+                   lda io_base+io_ps2_rcv
+ 	           nop
+ 	           jsr .delay
+	
+.loop_00           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_00
+                   lda io_base+io_ps2_rcv
+ 	           jsr .delay
+
+
+                   lda #$f3
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f1           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f1
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+	           jsr .delay
+
+
+                   lda #$c8
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f2           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f2
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+	
+	         
+	
+	           jsr .delay
+
+
+	
+                   lda #$f3
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f3           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f3
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+	
+	           
+
+	           jsr .delay
+
+
+
+                   lda #$64
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f4           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f4
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+	
+
+	           jsr .delay
+
+
+	
+
+                   lda #$f3
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f5           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f5
+                   lda io_base+io_ps2_rcv
+ 	           nop
+	
+	          	
+
+	
+	           jsr .delay
+
+
+
+                   lda #$50
+	          
+
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f6           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f6
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+
+	
+	
+	           jsr .delay
+
+
+                   lda #$f2
+	         
+
+
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f7           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f7
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+	
+	
+	           jsr .delay
+
+
+	
+
+
+.loop_fa8          lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_fa8
+                   lda io_base+io_ps2_rcv
+	           jsr .delay
+
+
+
+                   lda #$e8
+	          
+
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_f9           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_f9
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+
+
+
+	
+	           jsr .delay
+
+
+                   lda #$03
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_fa           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_fa
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+	
+	           	
+
+	
+	           jsr .delay
+
+
+                   lda #$f3
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_fb           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_fb
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+	
+
+
+ 	
+	           jsr .delay
+	
+
+
+                   lda #$28
+	         
+
+
+         	   sta io_base+io_ps2_xmit 	
+
+.loop_fc           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_fc
+                   lda io_base+io_ps2_rcv
+ 	           nop
+
+	
+	
+	     
+	           jsr .delay
+
+
+                   lda #$f4
+	          
+
+	         	   sta io_base+io_ps2_xmit 	
+
+.loop_fd           lda io_base+io_ps2_stat 	
+                   and #$40
+	           beq .loop_fd
+                   lda io_base+io_ps2_rcv
+ 	           nop
+	          
+
+
+	           nop
+ 	        
+
+                   nop
+ 	           nop
+ 	           nop
+	           nop
+ 	           nop
+	           lda #$01
+	
+	           sta io_base+io_ps2_cntrl
+	
+	
+
+	           lda #$c0
+	           sta io_base+io_uart_cnt  	
+                   ldx #$00
+  	           ldy #$00
+                   lda #$fa
+	           sta address
+	           lda #$ff
+	           sta address+1
+	        
+.prn_add           ldy #$00
+	           lda address+1
+	           jsr .prtbyt	
+                   lda address
+	           jsr .prtbyt	
+	           lda #$20
+	           jsr .put_c
+
+
+	           ldy  #$00
+                   lda (address),y
+	           jsr .prtbyt	
+	           lda #$20
+	           jsr .put_c
+
+	           ldx #$00
+
+.lab_01            lda .str_1,X	;
+                   beq .lab_80
+	           jsr .put_c	
+                   inx
+	           bne .lab_01  ;
+.lab_80	           lda #$0d
+	           jsr .put_c	
+	           lda #$0a
+	           jsr .put_c	
+
+.lab_81            lda io_base+io_ps2_xpos
+                   sta io_base+io_gpio_0
+                   lda io_base+io_ps2_ypos
+                   sta io_base+io_gpio_1
+
+
+	           lda io_base+io_pic_int
+
+	           and #$04
+                   beq .lab_81
+	           lda io_base+io_uart_rcv
+	           inc address	
+                   bne .prn_add
+	           inc address+1		
+                   jmp .prn_add
+
+
+
+
+.irq_vec           pha
+                   txa
+                   tax 
+                   pla
+                   rti
+
+.nmi_vec           pha
+                   pla
+                   rti
+
+
+	     * = $fffa  ; vectors
+	
+
+     dw .nmi_vec	       ;
+     dw .start		       ;
+     dw .irq_vec	       ;
+
+ code
+    
+
+
+
+
+

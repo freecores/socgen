@@ -1,0 +1,389 @@
+initial
+ begin
+ $display("              ");
+ $display("          ===================================================");
+ $display("%t  Test Start",$realtime);
+ $display("          ===================================================");
+ $display("              ");
+ reading = 8'h00;
+
+ cg.next(20);
+ cg.reset_off;
+ cg.next(10);
+ fork
+ begin
+
+
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+
+// send ff to device
+ bus.u_write(16'h8040, 8'hff);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(1000);
+
+ 
+
+// receive fa
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h40)  start = 0;
+    cg.next(100);
+   end
+ bus.u_cmp(16'h8040, 8'hfa);    
+ cg.next(1000);
+
+// receive aa
+ start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h40)  start = 0;
+    cg.next(100);
+   end
+ bus.u_cmp(16'h8040, 8'haa);   
+ cg.next(1000);
+
+// receive 00
+ start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h40)  start = 0;
+    cg.next(100);
+   end
+ bus.u_cmp(16'h8040, 8'h00);
+ cg.next(1000);
+
+
+// send f3 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'hf3);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+
+// send c8 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'hc8);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+// send f3 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'hf3);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+
+
+
+// send 64 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'h64);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+
+
+// send f3 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'hf3);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+
+
+// send 50 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'h50);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+ cg.next(10000);
+
+
+// send f2 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'hf2);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+
+
+// receive fa
+ start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h40)  start = 0;
+    cg.next(100);
+   end
+ bus.u_cmp(16'h8040, 8'hfa);
+ cg.next(1000);
+
+
+
+
+// send e8 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'he8);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+
+
+// send 03 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'h03);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+
+
+// send f3 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'hf3);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+
+// send 28 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'h28);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+
+// send f4 to device
+start   = 1'b1;
+ bus.u_read(16'h8042, reading);
+ while(start )
+   begin
+    bus.u_read(16'h8042, reading);
+    if( reading & 8'h80)  start = 1;
+    else                  start = 0;
+    cg.next(100);
+   end
+ bus.u_write(16'h8040, 8'hf4);
+ bus.u_write(16'h8044, 8'h02);
+  cg.next(5000);
+ bus.u_write(16'h8044, 8'h00);
+ cg.next(100);
+ bus.u_write(16'h8044, 8'h01);
+
+
+ cg.next(1000);
+
+
+ end
+ begin
+ ps2_model.rcv_byte(8'hff,1'b1);
+ cg.next(5000);
+ ps2_model.send_byte(8'hfa);
+ cg.next(20000);
+ ps2_model.send_byte(8'haa);
+ cg.next(20000);
+ ps2_model.send_byte(8'h00);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'hf3,1'b1);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'hc8,1'b0);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'hf3,1'b1);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'h64,1'b0);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'hf3,1'b1);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'h50,1'b1);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'hf2,1'b0);
+ cg.next(5000);
+ ps2_model.send_byte(8'hfa);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'he8,1'b1);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'h03,1'b1);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'hf3,1'b1);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'h28,1'b1);
+ cg.next(2000);
+ ps2_model.rcv_byte(8'hf4,1'b0);
+
+// Now send mice packets
+ ps2_model.send_byte(8'h12);
+ cg.next(2000);
+ ps2_model.send_byte(8'h34);
+ cg.next(2000);
+ ps2_model.send_byte(8'h56);
+ cg.next(2000);
+ 
+ ps2_model.send_byte(8'h78);
+ cg.next(2000);
+ ps2_model.send_byte(8'h9a);
+ cg.next(2000);
+ ps2_model.send_byte(8'hbc);
+ cg.next(2000);
+
+ ps2_model.send_byte(8'hde);
+ cg.next(2000);
+ ps2_model.send_byte(8'hf0);
+ cg.next(2000);
+ ps2_model.send_byte(8'h01);
+ cg.next(2000);
+
+ ps2_model.send_byte(8'h23);
+ cg.next(2000);
+ ps2_model.send_byte(8'h45);
+ cg.next(2000);
+ ps2_model.send_byte(8'h67);
+ cg.next(2000);
+
+ ps2_model.send_byte(8'h89);
+ cg.next(2000);
+ ps2_model.send_byte(8'hab);
+ cg.next(2000);
+ ps2_model.send_byte(8'hcd);
+ cg.next(2000);
+
+
+ end
+ join
+
+
+
+cg.exit;
+end
+
+
+
+
+
+
+

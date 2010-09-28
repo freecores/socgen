@@ -1,0 +1,5 @@
+`include  "../../bench/verilog/models/clock_gen.v"
+`include  "../../bench/verilog/models/micro_bus16_model.v"
+`include  "../../bench/verilog/models/mt45w8mw12.v"
+`include  "../../bench/verilog/models/iobuftri.v"
+`include  "../../bench/verilog/models/io_probe.v"

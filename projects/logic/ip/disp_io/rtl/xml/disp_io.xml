@@ -1,0 +1,21 @@
+<components>
+<component>
+   <name>disp_io</name>
+   <variant>disp_io</variant>
+      <library>
+          <child>
+            <name>cde_divider</name>
+            <parent>cde_divider</parent>
+            <family>cde</family>
+          </child>
+    </library>
+
+
+<sims>
+<sim>
+<name>default</name>
+</sim>
+</sims>
+
+</component>
+</components>

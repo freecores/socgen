@@ -1,0 +1,80 @@
+
+
+
+
+reg [31:0] d;
+
+  parameter SPI_TX_0   = 5'h0;
+  parameter SPI_CTRL   = 5'h10;
+  parameter SPI_DIVIDE = 5'h14;
+  parameter SPI_SS     = 5'h18;
+
+
+initial
+ begin
+ $display("              ");
+ $display("          ===================================================");
+ $display("%t  Test Start",$realtime  );
+ $display("          ===================================================");
+ $display("              ");
+ cg.next(8);
+ cg.reset_off;
+ $display("%t  Out of reset  ",$realtime  );
+ cg.next(88);
+
+
+ bus16.u_write(24'h004002, 16'h0011);
+ cg.next(10);
+ bus16.u_write(24'h004004, 16'h0022);
+ cg.next(10);
+ bus16.u_write(24'h004002, 16'h00ff);
+ cg.next(10);
+ bus16.u_write(24'h004004, 16'h00aa);
+ cg.next(10);
+ bus16.u_write(24'h004024, 16'h000f);
+ cg.next(10);
+ bus16.u_write(24'h004028, 16'h000e);
+ cg.next(10);
+ bus16.u_write(24'h004044, 16'h000d);
+ cg.next(10);
+ bus16.u_write(24'h004048, 16'h000c);
+ cg.next(10);
+ bus16.u_write(24'h004060, 16'h000b);
+ cg.next(10);
+ bus16.u_write(24'h004062, 16'h000a);
+ cg.next(10);
+ bus16.u_write(24'h004064, 16'h0009);
+ cg.next(10);
+
+ bus16.u_cmp(24'h004002, 16'h00ff);
+ cg.next(10);
+ bus16.u_cmp(24'h004004, 16'h00aa);
+ cg.next(10);
+ bus16.u_cmp(24'h004024, 16'h000f);
+ cg.next(10);
+ bus16.u_cmp(24'h004028, 16'h000e);
+ cg.next(10);
+ bus16.u_cmp(24'h004044, 16'h000d);
+ cg.next(10);
+ bus16.u_cmp(24'h004048, 16'h000c);
+ cg.next(10);
+ bus16.u_cmp(24'h004060, 16'h000b);
+ cg.next(10);
+ bus16.u_cmp(24'h004062, 16'h000a);
+ cg.next(10);
+ bus16.u_cmp(24'h004064, 16'h0009);
+
+ cg.next(100);
+
+
+cg.exit;
+end
+
+
+
+
+
+
+
+
+

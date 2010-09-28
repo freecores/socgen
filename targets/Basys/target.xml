@@ -1,0 +1,12 @@
+<targets>
+<target>
+<name>BASYS</name>
+      <children>
+          <child>
+            <name>disp_io</name>
+            <parent>disp_io</parent>
+            <family>logic</family>
+          </child>
+      </children>
+</target>
+</targets>

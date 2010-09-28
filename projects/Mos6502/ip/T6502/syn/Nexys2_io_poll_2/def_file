@@ -1,0 +1,23 @@
+`define SYNTHESIS
+`define ROM_FILE  "NONE"
+`define ROM_WORDS 128
+`define ROM_ADD   7
+
+`define PROG_ROM_FILE  "../../../../../../Mos6502/sw/io_poll_2/io_poll_2.abs16"
+`define PROG_ROM_WORDS 128
+`define PROG_ROM_ADD   7
+
+
+
+`define MODULE_NAME Nexys2_T6502_io_poll_2
+
+`define STARTUP "../../../../../sw/vga_startup_screen/vga_startup_screen.abs"
+`define FONT    "../../../../../sw/vga_font/vga_font.abs"
+
+
+`define JTAG_USER1_WIDTH  8
+`define JTAG_USER1_RESET  8'h12
+`define JTAG_USER1_UPDR   1'b1
+`define JTAG_USER2_WIDTH  16
+`define JTAG_USER2_RESET  16'h0000
+`define JTAG_USER2_UPDR   1'b0

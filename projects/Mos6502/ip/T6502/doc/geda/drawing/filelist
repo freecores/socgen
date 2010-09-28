@@ -1,0 +1,14 @@
+`include  "../../../rtl/gen/syn/T6502.v"
+`include  "../../../../../children/logic/ip/io_module/rtl/gen/syn/io_module.v"
+`include  "../../../../../children/logic/ip/uart/rtl/gen/syn/uart.v"
+`include  "../../../../../children/logic/ip/ps2_interface/rtl/gen/syn/ps2_interface.v"
+
+`include  "../../../../../children/logic/ip/vga_char_ctrl/rtl/gen/syn/vga_char_ctrl.v"
+`include  "../../../../../children/logic/ip/serial_rcvr/rtl/gen/syn/serial_rcvr.v"
+
+`include  "../../../../../../../../socgen/lib/cde_sram/cde_sram.v"
+`include  "../../../../../../../../socgen/lib/cde_serial_xmit/cde_serial_xmit.v"
+`include  "../../../../../../../../socgen/lib/cde_serial_rcvr/cde_serial_rcvr.v"
+`include  "../../../../../../../../socgen/lib/cde_synchronizers/cde_sync_with_hysteresis.v"
+`include  "../../../../../../../../socgen/lib/cde_fifo/cde_fifo.v"
+`include  "../../../../../../../../socgen/lib/cde_divider/cde_divider.v"
