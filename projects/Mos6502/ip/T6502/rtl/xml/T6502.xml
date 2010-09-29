@@ -2,7 +2,268 @@
 <component>
    <name>T6502</name>
    <variant>T6502</variant>
-      
+   
+
+<parameters>
+
+ <parameter> 
+  <name>RAM_WORDS</name>
+  <default>2048</default>
+ </parameter>   
+ <parameter> 
+  <name>RAM_ADD</name>
+  <default>11</default>
+ </parameter>     
+ <parameter> 
+  <name>ROM_WORDS</name>
+  <default>4096</default>
+ </parameter>      
+ <parameter> 
+  <name>ROM_ADD</name>
+  <default>12</default>
+ </parameter>        
+ <parameter> 
+  <name>ROM_FILE</name>
+  <default>"NONE"</default>
+ </parameter>    
+ <parameter> 
+  <name>PROG_ROM_WORDS</name>
+  <default>ROM_WORDS</default>
+ </parameter> 
+ <parameter> 
+  <name>PROG_ROM_ADD</name>
+  <default>ROM_ADD </default>
+ </parameter>  
+ <parameter> 
+  <name>PROG_ROM_FILE</name>
+  <default>ROM_FILE</default>
+ </parameter>  
+ <parameter> 
+  <name>VEC_TABLE</name>
+  <default>8'hff</default>
+ </parameter>
+ <parameter> 
+  <name>TX_FIFO</name>
+  <default>0</default>
+ </parameter>  
+ <parameter> 
+  <name>TX_FIFO_SIZE</name>
+  <default>3</default>
+ </parameter>  
+ <parameter> 
+  <name>TX_FIFO_WORDS</name>
+  <default>8</default>
+ </parameter>  
+ <parameter> 
+  <name>RX_FIFO</name>
+  <default>0</default>
+ </parameter>  
+ <parameter> 
+  <name>RX_FIFO_SIZE</name>
+  <default>3</default>
+ </parameter>  
+ <parameter> 
+  <name>RX_FIFO_WORDS</name>
+  <default>8</default>
+ </parameter>    
+ <parameter> 
+  <name>STARTUP</name>
+  <default>"NONE"</default>
+ </parameter>  
+ <parameter> 
+  <name>FONT</name>
+  <default>"NONE"</default>
+ </parameter>  
+
+</parameters>
+
+<interfaces>   
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>clk</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>reset</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[23:1]</width>
+ <name>ext_add</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[15:0]</width>
+ <name>ext_wdata</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[15:0]</width>
+ <name>ext_rdata</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>ext_ub</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>ext_lb</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>ext_rd</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>ext_wr</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[1:0]</width>
+ <name>ext_cs</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[7:0]</width>
+ <name>alu_status</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>txd_pad_out</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>rxd_pad_in</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>cts_pad_in</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>rts_pad_out</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>ps2_clk_oe</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>ps2_clk_in</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>ps2_data_oe</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>ps2_data_in</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type><width>[7:0]</width>
+ <name>gpio_0_out</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type><width>[7:0]</width>
+ <name>gpio_0_oe</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[7:0]</width>
+ <name>gpio_0_lat</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[7:0]</width>
+ <name>gpio_0_in</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[7:0]</width>
+ <name>gpio_1_out</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[7:0]</width>
+ <name>gpio_1_oe</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[7:0]</width>
+ <name>gpio_1_lat</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[7:0]</width>
+ <name>gpio_1_in</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[3:0]</width>
+ <name>ext_irq_in</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[2:0]</width>
+ <name>vgared_pad_out</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[2:0]</width>
+ <name>vgagreen_pad_out</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <width>[1:0]</width>
+ <name>vgablue_pad_out</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>hsync_n_pad_out</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>wire</type>
+ <name>vsync_n_pad_out</name>
+</interface>
+
+</interfaces>
+
+
+   
       <brothers>
           <brother>
             <variant>T6502_alu_logic</variant>

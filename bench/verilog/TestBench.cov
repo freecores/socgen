@@ -42,17 +42,13 @@
 /**********************************************************************/
 `define SYNTHESIS
 
-`include  "./TB.defs"
+
 
 `timescale    1ns/1ns
 `include  "./filelist.cov"
 
 module TB();
 
-
-
-wire clk;
-wire reset;
 
 `include "./dut"
 

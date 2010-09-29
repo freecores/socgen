@@ -2,7 +2,25 @@
 <component>
    <name>T6502_alu_logic</name>
    <variant>T6502_alu_logic</variant>
-      
+     <interfaces>
+
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>alu_op_a</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>alu_op_b</name></interface>
+<interface><direction>input</direction><type>wire</type><name>alu_op_c</name></interface>
+<interface><direction>input</direction><type>wire</type><name>alu_op_b_inv</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>result</name></interface>
+<interface><direction>output</direction><type>reg</type><name>r_result</name></interface>
+<interface><direction>output</direction><type>reg</type><name>c_result</name></interface>
+<interface><direction>output</direction><type>reg</type><name>v_result</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>and_out</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>orr_out</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>eor_out</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[8:0]</width><name>a_sh_left</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[8:0]</width><name>a_sh_right</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[8:0]</width><name>b_sh_left</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[8:0]</width><name>b_sh_right</name></interface>
+
+</interfaces>
 
       <sims>
           <sim>

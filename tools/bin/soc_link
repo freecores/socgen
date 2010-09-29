@@ -191,6 +191,48 @@ foreach my $project (@projects)
 
      
 
+
+
+
+             print "CREATING dut    for   $project   $component  $name $variant \n"; 
+
+               
+             my $outfile ="work/${project}/ip/${component}/sim/cov/${variant}/dut";
+             open DUTFILE,">$outfile" or die "unable to open $outfile";
+
+
+
+             
+
+             foreach  my   $i_name ($doc->findnodes("//component[name/text() = '$name']/interfaces/interface/name"))
+               {
+                 my($interface_name)  = $i_name ->findnodes('./text()')->to_literal ;
+                 my($width)      = $i_name ->findnodes('../width/text()')->to_literal ;
+                 print DUTFILE  "wire    ${width}      ${interface_name};\n";
+               }
+
+
+                 print DUTFILE  "\n\n\n  $variant \n dut \n (   \n";
+
+
+                  my $first = 1;
+             foreach  my   $i_name ($doc->findnodes("//component[name/text() = '$name']/interfaces/interface/name"))
+               {
+   
+                 my($interface_name)  = $i_name ->findnodes('./text()')->to_literal ;
+                 if($first)
+                 {print DUTFILE  "        .${interface_name}      (${interface_name})";$first=0}
+                 else
+                 {print DUTFILE  ",\n        .${interface_name}   (${interface_name})";}
+               }
+
+
+                 print DUTFILE  "\n  );\n\n\n\n";
+
+
+
+
+
              print "CREATING sim filelists for   $project  $component   $chip   $name  $variant \n"; 
              foreach  my   $i_name ($doc->findnodes("//component[name/text() = '$name']/sims/sim/name"))
                {
@@ -223,14 +265,15 @@ foreach my $project (@projects)
                  print "Creating    $path\n"  unless( -e $path );
                  mkdir $path,0755             unless( -e $path );
 
-                 $cmd  = 
-                 "lndir -silent  ${home}/targets/${chip_target}   ${home}/work/${project}/ip/${component}/syn/${chip}/target" ;
-                 if (system($cmd)) {}
 
-                 $cmd  = 
-                 "lndir  -silent ${home}/lib    ${home}/work/${project}/ip/${component}/syn/${chip}/target/lib/syn" ;
-                 if (system($cmd)) {}
- 
+
+
+
+
+             &link_dir( "${home}/targets/${chip_target}", "${home}/work/${project}/ip/${component}/syn/${chip}/target"  );
+
+             &link_dir( "${home}/lib",          "${home}/work/${project}/ip/${component}/syn/${chip}/target/lib/syn"  );
+
                  push @target_list ,$chip_target ;
 
                 }
@@ -256,10 +299,14 @@ foreach my $project (@projects)
                  print "Creating    $path\n"  unless( -e $path );
                  mkdir $path,0755             unless( -e $path );
 
+
+
+
                  $root = "${home}/projects/${child_family}/bin";
                  $dest = "${home}/work/${project}/children/${child_family}/bin";
-                 $cmd  =  "lndir ${root} ${dest} ";
-                 if (system($cmd)) {die "Failed ";}
+                 &link_dir( "$root", "$dest"  );
+
+
                  symlink( "${home}/tools/bin/Makefile.root", "${home}/work/${project}/children/${child_family}/bin/Makefile.root");
                  symlink( "${home}/tools/bin/Makefile",      "${home}/work/${project}/children/${child_family}/bin/Makefile");
 
@@ -269,8 +316,9 @@ foreach my $project (@projects)
 
                  $root = "${home}/projects/${child_family}/sw";
                  $dest = "${home}/work/${project}/children/${child_family}/sw";
-                 $cmd  =  "lndir -silent  ${root} ${dest} ";
-                 if (system($cmd)) {die "Failed ";}
+                 &link_dir( "$root", "$dest"  );
+
+
 
                  my $path  = "work/${project}/children/${child_family}/ip";
                  print "Creating    $path\n"  unless( -e $path );
@@ -282,8 +330,8 @@ foreach my $project (@projects)
 
                  $root = "${home}/projects/${child_family}/ip/${child_parent}";
                  $dest = "${home}/work/${project}/children/${child_family}/ip/${child_parent}";
-                 $cmd  =  "lndir -silent  ${root}  ${dest} ";
-                 if (system($cmd)) {die "Failed ";}
+                 &link_dir( "$root", "$dest"  );
+
 
                  my $path  = "${home}/work/${project}/children/${child_family}/ip/${child_parent}/rtl/gen";
                  print "Creating    $path\n"  unless( -e $path );
@@ -320,8 +368,8 @@ foreach my $project (@projects)
 
                  $root = "${home}/projects/${child_family}/bin";
                  $dest = "${home}/work/${project}/children/${child_family}/bin";
-                 $cmd  =  "lndir ${root} ${dest} ";
-                 if (system($cmd)) {die "Failed ";}
+                 &link_dir( "$root", "$dest"  );
+
                  symlink( "${home}/tools/bin/Makefile.root", "${home}/work/${project}/children/${child_family}/bin/Makefile.root");
                  symlink( "${home}/tools/bin/Makefile",      "${home}/work/${project}/children/${child_family}/bin/Makefile");
 
@@ -331,8 +379,8 @@ foreach my $project (@projects)
 
                  $root = "${home}/projects/${child_family}/sw";
                  $dest = "${home}/work/${project}/children/${child_family}/sw";
-                 $cmd  =  "lndir -silent  ${root} ${dest} ";
-                 if (system($cmd)) {die "Failed ";}
+                 &link_dir( "$root", "$dest"  );
+
 
                  my $path  = "work/${project}/children/${child_family}/ip";
                  print "Creating    $path\n"  unless( -e $path );
@@ -344,8 +392,9 @@ foreach my $project (@projects)
 
                  $root = "${home}/projects/${child_family}/ip/${child_parent}";
                  $dest = "${home}/work/${project}/children/${child_family}/ip/${child_parent}";
-                 $cmd  =  "lndir -silent  ${root}  ${dest} ";
-                 if (system($cmd)) {die "Failed ";}
+                 &link_dir( "$root", "$dest"  );
+
+
 
                  my $path  = "${home}/work/${project}/children/${child_family}/ip/${child_parent}/rtl/gen";
                  print "Creating    $path\n"  unless( -e $path );
@@ -423,6 +472,40 @@ sub link_sub {
         print "Linking     $dest_path\n"  unless( -e $dest_path );
         symlink( "${home}/${path}", $dest_path);
     }
+}
+
+
+
+# recursively map directory information 
+
+sub link_dir {
+    my $src  = shift;
+    my $dest = shift;
+    return unless( -e $src );
+ 
+
+    if( -d $src ) 
+        {
+        print "Creating    $dest\n"  unless( -e $dest );
+        mkdir $dest,0755;
+        my @contents = (  );
+        opendir( DIR, $src );
+        while( my $item = readdir( DIR )) 
+            {
+            next if( $item eq '.' or $item eq '..'   or $item eq '.svn'    );
+            push( @contents, $item );
+            }
+        closedir( DIR );
+ 
+        # recurse on items in the directory
+        foreach my $item ( @contents )          { &link_dir("$src/$item", "$dest/$item" );}
+ 
+
+       } 
+       else 
+       {
+        symlink( "${src}", "${dest}") unless( -e "${dest}" );
+       }
 }
 
 
