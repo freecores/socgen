@@ -175,11 +175,10 @@ mrisc pic(
 // Instantiate the Program RAM.
 cde_sram
 #(
-
-.WORDS(  `ROM_WORDS), 
-.ADDR(  `ROM_ADDR  ),  
-.WIDTH (  `ROM_WIDTH ), 
-.INIT_FILE(`ROM_FILE)
+.WORDS(ROM_WORDS), 
+.ADDR(ROM_ADDR  ),  
+.WIDTH (ROM_WIDTH ), 
+.INIT_FILE(ROM_FILE)
 )
 
 
