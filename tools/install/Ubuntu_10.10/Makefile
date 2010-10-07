@@ -12,18 +12,15 @@ install:
 	chmod 755 ../../bin/* ;\
 	mkdir ~/bin;\
 	cp ../../bin/* ~/bin;\
-	sudo cp -r ../../etc   /   ;\
         sudo apt-get  install -y subversion;\
         sudo apt-get  install -y libverilog-perl;\
 	sudo apt-get  install -y libxml-libxml-perl;\
         sudo apt-get  install -y iverilog;\
         sudo apt-get  install -y covered;\
+	sudo apt-get  install -y xutils-dev;\
         sudo apt-get  install -y gputils;\
 	sudo apt-get  install -y gtkterm;\
 	sudo apt-get  install -y gtkwave;\
-	sudo apt-get  install -y fxload;\
-	sudo apt-get  install -y urjtag;\
-	sudo apt-get  install -y libftdi-dev;\
 	sudo apt-get  install -y crasm;\
 	sudo apt-get  install -y eclipse;\
 	sudo apt-get  install -y perl-tk;\

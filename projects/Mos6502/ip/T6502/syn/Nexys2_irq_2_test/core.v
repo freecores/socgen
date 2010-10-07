@@ -88,7 +88,7 @@ T6502   #(
 	 .PROG_ROM_WORDS    (`PROG_ROM_WORDS),    	 
          .PROG_ROM_ADD      (`PROG_ROM_ADD),    	 
          .PROG_ROM_FILE     (`PROG_ROM_FILE),	  
-         .RAM_WORDS    (4096),           
+         .RAM_WORDS    (2048),           
          .STARTUP      (`STARTUP),
          .FONT         (`FONT)
          )  

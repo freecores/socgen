@@ -1,15 +1,3 @@
 `define     TIMEOUT     100000
 
 
-
-
-`define  PROG_ROM_WORDS  2048
-`define  PROG_ROM_ADD  11
-`define  PROG_ROM_FILE "../../../../../../Mos6502/sw/inst_2_test/inst_2_test.abs16"
-
-
-
-`define  ROM_WORDS  128
-`define  ROM_ADD  7
-`define  ROM_FILE "../../../../../../Mos6502/sw/table/table.abs16"
-

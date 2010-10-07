@@ -1,7 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <components>
 <component>
    <name>vga_char_ctrl</name>
    <variant>vga_char_ctrl_600x432</variant>
+
+<parameters>
+<parameter><name>STARTUP</name><default>"NONE"</default></parameter>
+<parameter><name>FONT</name><default>"NONE"</default></parameter>
+<parameter><name>CHARACTER_DECODE_DELAY</name><default>4</default></parameter>
+</parameters>
+<interfaces>
+<interface><direction>input</direction><type> wire</type><name>clk</name></interface>
+<interface><direction>input</direction><type>wire</type><name>reset</name></interface>
+<interface><direction>input</direction><type>wire</type><name>ascii_load</name></interface>
+<interface><direction>input</direction><type>wire</type><name>add_l_load</name></interface>
+<interface><direction>input</direction><type>wire</type><name>add_h_load</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>wdata</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[13:0]</width><name>address</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>char_color</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>back_color</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>cursor_color</name></interface>
+<interface><direction>output</direction><type>wire</type><width>[2:0]</width><name>vga_red_pad_out</name></interface>
+<interface><direction>output</direction><type>wire</type><width>[2:0]</width><name>vga_green_pad_out</name></interface>
+<interface><direction>output</direction><type>wire</type><width>[1:0]</width><name>vga_blue_pad_out</name></interface>
+<interface><direction>output</direction><type>wire</type><name>hsync_n_pad_out</name></interface>
+<interface><direction>output</direction><type>wire</type><name>vsync_n_pad_out</name></interface>
+</interfaces>
+
+
       <library>
           <child>
             <name>cde_sram</name>

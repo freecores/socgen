@@ -2,16 +2,3 @@
 
 
 
-`define  PROG_ROM_WORDS 2048 
-`define  PROG_ROM_ADD   11  
-`define  PROG_ROM_FILE "../../../../../../Mos6502/sw/kim_2/kim_2.abs16"
-
-
-
-`define  ROM_WORDS 128
-`define  ROM_ADD   7 
-`define  ROM_FILE "../../../../../../Mos6502/sw/table_tim1/table_tim1.abs16"
-
-
-
-

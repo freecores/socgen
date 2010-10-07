@@ -120,8 +120,8 @@ soc(
 assign  vgared_pad_out[2:0]   = 3'b000;
 assign  vgagreen_pad_out[2:0] = 3'b000;
 assign  vgablue_pad_out[1:0]  = 2'b00;
-assign  hsync_pad_out         = 1'b0;
-assign  vsync_pad_out         = 1'b0;
+assign  hsync_pad_out         = 1'b1;
+assign  vsync_pad_out         = 1'b1;
 
 
 

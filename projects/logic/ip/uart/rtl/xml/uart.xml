@@ -1,10 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <components>
 <component>
    <name>uart</name>
    <variant>uart</variant>
 
 
-      <brothers>
+<parameters>
+<parameter><name>  PRESCALE</name><default>5'b01100</default></parameter>
+<parameter><name>  PRE_SIZE</name><default>5</default></parameter>
+<parameter><name>  SIZE</name><default>8</default></parameter>
+<parameter><name>  DIV</name><default>0</default></parameter>
+<parameter><name>  DIV_SIZE</name><default>4</default></parameter>
+<parameter><name>  TX_FIFO</name><default>0</default></parameter>
+<parameter><name>  TX_FIFO_SIZE</name><default>3</default></parameter>
+<parameter><name>  TX_FIFO_WORDS</name><default>8</default></parameter>
+<parameter><name>  RX_FIFO</name><default>0</default></parameter>
+<parameter><name>  RX_FIFO_SIZE</name><default>3</default></parameter>
+<parameter><name>  RX_FIFO_WORDS</name><default>8</default></parameter>  
+</parameters>
+
+   
+
+
+<interfaces>
+<interface><direction>input</direction><type>wire</type><name>clk</name></interface>
+<interface><direction>input</direction><type>wire</type><name>reset</name></interface>
+<interface><direction>input</direction><type>wire</type><name>parity_enable</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[DIV_SIZE-1:0]</width><name>divider_in</name></interface>
+<interface><direction>input</direction><type>wire</type><name>cts_pad_in</name></interface>
+<interface><direction>output</direction><type>reg</type><name>rts_pad_out</name></interface>
+<interface><direction>output</direction><type>wire</type><name>txd_pad_out</name></interface>
+<interface><direction>input</direction><type>wire</type><name>rxd_pad_in</name></interface>
+<interface><direction>output</direction><type>reg</type><name>cts_out</name></interface>
+<interface><direction>input</direction><type>wire</type><name>rts_in</name></interface>
+<interface><direction>input</direction><type>wire</type><name>txd_parity</name></interface>
+<interface><direction>input</direction><type>wire</type><name>txd_force_parity</name></interface>
+<interface><direction>input</direction><type>wire</type><name>txd_load</name></interface>
+<interface><direction>input</direction><type>wire</type><name>txd_break</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[SIZE-1:0]</width><name>txd_data_in</name></interface>
+<interface><direction>output</direction><type>wire</type><name>txd_buffer_empty</name></interface>
+<interface><direction>input</direction><type>wire</type><name>rxd_data_avail_stb</name></interface>
+<interface><direction>output</direction><type>wire</type><name>rxd_data_avail</name></interface>
+<interface><direction>input</direction><type>wire</type><name>rxd_parity</name></interface>
+<interface><direction>input</direction><type>wire</type><name>rxd_force_parity</name></interface>
+<interface><direction>output</direction><type>wire</type><width>[SIZE-1:0]</width><name>rxd_data_out</name></interface>
+<interface><direction>output</direction><type>wire</type><name>rxd_parity_error</name></interface>
+<interface><direction>output</direction><type>wire</type><name>rxd_stop_error</name></interface>
+</interfaces>
+
+
+
+   <brothers>
           <brother>
             <variant>serial_rcvr</variant>
             <component>serial_rcvr</component>

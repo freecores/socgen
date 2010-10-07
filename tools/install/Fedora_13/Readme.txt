@@ -1,7 +1,8 @@
 
 
 su
-yum groupinstall 'Electronics Lab'
+yum groupinstall 'Electronic Lab'
+yum install      perl-XML-LibXML
 
 (logout  from root)
 
@@ -10,12 +11,6 @@ yum groupinstall 'Electronics Lab'
 chmod 755 ../../bin/* ;\
 mkdir ~/bin;\
 cp ../../bin/* ~/bin;\
-
-use system administraction add software to add:
-
-Perl interface to the libxml2 library
-perl-XML-LibXML-1:170-4.fc13
-
 
 cd socgen
 make build_soc

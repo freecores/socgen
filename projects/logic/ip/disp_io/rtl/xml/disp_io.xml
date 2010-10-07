@@ -1,9 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <components>
 <component>
    <name>disp_io</name>
    <variant>disp_io</variant>
-      <library>
-          <child>
+ 
+<interfaces>
+<interface><direction>input</direction><type>wire</type><name>clk</name></interface>
+<interface><direction>input</direction><type>wire</type><name>reset</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[15:0]</width><name>PosD</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>PosL</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[3:0]</width><name>PosB</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>PosS</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[3:0]</width><name>btn_pad_in</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>sw_pad_in</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>led_pad_out</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[6:0]</width><name>seg_pad_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>dp_pad_out</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[3:0]</width><name>an_pad_out</name></interface>
+</interfaces>
+
+
+<library>
+       <child>
             <name>cde_divider</name>
             <parent>cde_divider</parent>
             <family>cde</family>

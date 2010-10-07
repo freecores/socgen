@@ -1,0 +1,7 @@
+parameter STARTUP="NONE";
+parameter FONT="NONE";
+parameter CHARACTER_DECODE_DELAY=4;
+
+
+
+

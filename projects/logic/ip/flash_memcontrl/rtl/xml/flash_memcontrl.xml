@@ -1,7 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <components>
 <component>
    <name>flash_memcontrl</name>
    <variant>flash_memcontrl</variant>
+
+
+<parameters> <parameter><name>ADDR_BITS</name><default>24</default></parameter></parameters>
+ 
+   
+   
+<interfaces>
+<interface><direction>input</direction><type>wire</type><name>clk</name></interface>
+<interface><direction>input</direction><type>wire</type><name>reset</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[ADDR_BITS-1:1]</width><name>addr</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[15:0]</width><name>wdata</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[1:0]</width><name>cs</name></interface>
+<interface><direction>input</direction><type>wire</type><name>rd</name></interface>
+<interface><direction>input</direction><type>wire</type><name>wr</name></interface>
+<interface><direction>input</direction><type>wire</type><name>stb</name></interface>
+<interface><direction>input</direction><type>wire</type><name>ub</name></interface>
+<interface><direction>input</direction><type>wire</type><name>lb</name></interface>
+<interface><direction>output</direction><type>reg</type><name>ack</name></interface>
+<interface><direction>output</direction><type>wire</type><width>[15:0]</width><name>rdata</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[ADDR_BITS-1:1]</width><name>memadr_out</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[15:0]</width><name>memdb_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>memdb_oe</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[15:0]</width><name>memdb_in</name></interface>
+<interface><direction>output</direction><type>reg</type><name>memoe_n_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>memwr_n_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>ramadv_out_n</name></interface>
+<interface><direction>output</direction><type>reg</type><name>ramclk_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>ramub_n_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>ramlb_n_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>ramcs_n_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>ramcre_out</name></interface>
+<interface><direction>input</direction><type>wire</type><name>ramwait_in</name></interface>
+<interface><direction>output</direction><type>reg</type><name>flashcs_n_out</name></interface>
+<interface><direction>output</direction><type>reg</type><name>flashrp_n_out</name></interface>
+<interface><direction>input</direction><type>wire</type><name>flashststs_in</name></interface>
+ </interfaces>
+
+
+
       <library>
           <child>
             <name>cde_sram</name>

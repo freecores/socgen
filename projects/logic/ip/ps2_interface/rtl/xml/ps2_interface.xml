@@ -1,8 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <components>
 <component>
    <name>ps2_interface</name>
    <variant>ps2_interface</variant>
-      <library>
+<parameters>
+<parameter><name>FREQ</name><default>24</default></parameter>                     
+<parameter><name>CLK_HOLD_DELAY</name><default>100</default></parameter>       
+<parameter><name>DATA_SETUP_DELAY</name><default>20</default></parameter>        
+<parameter><name>DEBOUNCE_DELAY</name><default>4'b1111</default></parameter>    
+</parameters>
+
+
+ <interfaces>
+<interface><direction>input</direction><type>wire</type><name>clk</name></interface>
+<interface><direction>input</direction><type>wire</type><name>reset</name></interface>
+<interface><direction>output</direction><type>wire</type><name>ps2_clk_pad_oe</name></interface>
+<interface><direction>input</direction><type>wire</type><name>ps2_clk_pad_in</name></interface>
+<interface><direction>output</direction><type>wire</type><name>ps2_data_pad_oe</name></interface>
+<interface><direction>input</direction><type>wire</type><name>ps2_data_pad_in</name></interface>
+<interface><direction>output</direction><type>wire</type><name>busy</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>tx_data</name></interface>
+<interface><direction>input</direction><type>wire</type><name>tx_write</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>rx_data</name></interface>
+<interface><direction>output</direction><type>reg</type><name>rx_read</name></interface>
+<interface><direction>output</direction><type>reg</type><name>rx_full</name></interface>
+<interface><direction>output</direction><type>reg</type><name>rx_parity_error</name></interface>
+<interface><direction>output</direction><type>reg</type><name>rx_parity_rcv</name></interface>
+<interface><direction>output</direction><type>reg</type><name>rx_parity_cal</name></interface>
+<interface><direction>output</direction><type>reg</type><name>rx_frame_error</name></interface>
+<interface><direction>input</direction><type>wire</type><name>rx_clear</name></interface>
+<interface><direction>output</direction><type>wire</type><name>tx_buffer_empty</name></interface>
+<interface><direction>output</direction><type>reg</type><name>tx_ack_error</name></interface>
+ </interfaces>
+
+     <library>
           <child>
             <name>cde_sram</name>
             <parent>cde_sram</parent>

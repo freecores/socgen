@@ -1,90 +1,123 @@
 
 
-
-
-wire [7:0]  gpio_0_out;
-wire [7:0]  gpio_1_out;
-
-wire        serial_txd;
-wire        serial_rxd;
-
-
-
-
-
-
-
-wire         ps2_clk_in;   
-wire         ps2_data_in;  
-wire         ps2_clk_oe;   
-wire         ps2_data_oe;  
-
-
-wire         ps2_clk;   
-wire         ps2_data;  
-
-
-
-
-T6502 
-    #(.ROM_WORDS       (`ROM_WORDS       ),
-      .ROM_ADD         (`ROM_ADD         ),
-      .ROM_FILE        (`ROM_FILE        ),
-      .PROG_ROM_WORDS  (`PROG_ROM_WORDS  ),
-      .PROG_ROM_ADD    (`PROG_ROM_ADD    ),
-      .PROG_ROM_FILE   (`PROG_ROM_FILE   ),
-      .RAM_WORDS       ( 4096            )
-
-       )  dut  (
-         .clk          ( clk             ),
-         .reset        ( reset           ),
-         .ext_irq_in   ( 4'h0            ),
-
-         .gpio_0_out   ( gpio_0_out      ),
-         .gpio_0_in    ( gpio_0_out      ),
-         .gpio_0_oe    (                 ),
-         .gpio_0_lat   (                 ),
-
-         .gpio_1_out   ( gpio_1_out      ),
-         .gpio_1_in    ( gpio_1_out      ),
-         .gpio_1_oe    (                 ),
-         .gpio_1_lat   (                 ),
-
-
-         .ps2_clk_oe   ( ps2_clk_oe      ),
-         .ps2_clk_in   ( ps2_clk_in      ),
-         .ps2_data_oe  ( ps2_data_oe     ),
-         .ps2_data_in  ( ps2_data_in     ),
+wire    [23:1]      ext_add;
+wire    [15:0]      ext_wdata;
+wire    [15:0]      ext_rdata;
+wire                ext_ub;
+wire                ext_lb;
+wire                ext_rd;
+wire                ext_wr;
+wire    [1:0]       ext_cs;
+wire    [7:0]       alu_status;
+wire                txd_pad_out;
+wire                rxd_pad_in;
+wire                cts_pad_in;
+wire                rts_pad_out;
+wire                ps2_clk_oe;
+wire                ps2_clk_in;
+wire                ps2_data_oe;
+wire                ps2_data_in;
+wire    [7:0]       gpio_0_out;
+wire    [7:0]       gpio_0_oe;
+wire    [7:0]       gpio_0_lat;
+wire    [7:0]       gpio_0_in;
+wire    [7:0]       gpio_1_out;
+wire    [7:0]       gpio_1_oe;
+wire    [7:0]       gpio_1_lat;
+wire    [7:0]       gpio_1_in;
+wire    [3:0]       ext_irq_in;
+wire    [2:0]       vgared_pad_out;
+wire    [2:0]       vgagreen_pad_out;
+wire    [1:0]       vgablue_pad_out;
+wire                hsync_n_pad_out;
+wire                vsync_n_pad_out;
 
 
 
-         .txd_pad_out  ( serial_txd      ),
-         .rxd_pad_in   ( serial_rxd      ),
-         .cts_pad_in   ( loop            ),
-         .rts_pad_out  ( loop            )
 
 
 
+
+
+
+T6502
+    #(.RAM_WORDS       ( RAM_WORDS      ),    
+      .RAM_ADD         ( RAM_ADD        ),   
+      .ROM_WORDS       ( ROM_WORDS      ), 
+      .ROM_ADD         ( ROM_ADD        ),   
+      .ROM_FILE        ( ROM_FILE       ),   
+      .PROG_ROM_WORDS  ( PROG_ROM_WORDS ),
+      .PROG_ROM_ADD    ( PROG_ROM_ADD   ),
+      .PROG_ROM_FILE   ( PROG_ROM_FILE  ),
+      .VEC_TABLE       ( VEC_TABLE      ),
+      .TX_FIFO         ( TX_FIFO        ),
+      .TX_FIFO_SIZE    ( TX_FIFO_SIZE   ),
+      .TX_FIFO_WORDS   ( TX_FIFO_WORDS  ),
+      .RX_FIFO         ( RX_FIFO        ),
+      .RX_FIFO_SIZE    ( RX_FIFO_SIZE   ),
+      .RX_FIFO_WORDS   ( RX_FIFO_WORDS  ),
+      .STARTUP         ( STARTUP        ),
+      .FONT            ( FONT           )
+
+
+
+ )
+
+dut
+(
+     .clk              ( clk          ),	
+     .reset            ( reset        ),
+     .alu_status       ( alu_status   ), 
+     .ext_irq_in       ( ext_irq_in   ),
+     .ext_add          ( ext_add      ),
+     .ext_wdata        ( ext_wdata    ), 
+     .ext_rdata        ( ext_rdata    ),
+     .ext_ub           ( ext_ub       ),
+     .ext_lb           ( ext_lb       ),
+     .ext_rd           ( ext_rd       ),
+     .ext_wr           ( ext_wr       ),
+     .ext_cs           ( ext_cs       ),
+
+     .gpio_0_out       ( gpio_0_out   ),
+     .gpio_0_in        ( gpio_0_in    ),
+     .gpio_0_oe        ( gpio_0_oe    ),
+     .gpio_0_lat       ( gpio_0_lat   ),
+
+     .gpio_1_out       ( gpio_1_out   ),
+     .gpio_1_in        ( gpio_1_in    ),
+     .gpio_1_oe        ( gpio_1_oe    ),
+     .gpio_1_lat       ( gpio_1_lat   ),
+
+     .ps2_clk_oe       ( ps2_clk_oe   ),
+     .ps2_clk_in       ( ps2_clk_in   ),
+     .ps2_data_oe      ( ps2_data_oe  ),
+     .ps2_data_in      ( ps2_data_in  ),
+
+     .txd_pad_out      ( txd_pad_out  ),
+     .rxd_pad_in       ( rxd_pad_in   ),
+     .cts_pad_in       ( cts_pad_in   ),
+     .rts_pad_out      ( rts_pad_out       ),
+
+     .vgared_pad_out   ( vgared_pad_out    ), 
+     .vgagreen_pad_out ( vgagreen_pad_out  ),  
+     .vgablue_pad_out  ( vgablue_pad_out   ),
+     .hsync_n_pad_out  ( hsync_n_pad_out   ),
+     .vsync_n_pad_out  ( vsync_n_pad_out   )
 
 
 );
 
+assign     ext_irq_in     = 4'b0000      ;
+assign     ext_rdata        = 16'h0000     ;
+
+assign     gpio_0_in        = gpio_0_out   ;
+assign     gpio_1_in        = gpio_1_out   ;
+assign      cts_pad_in  = rts_pad_out;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+wire          ps2_clk;   
+wire          ps2_data;  
 
 
 
@@ -136,7 +169,6 @@ ps2_model
  uart_model (
              .clk            ( clk           ),
              .reset          ( reset         ),
-             .txd_in         ( serial_txd    ),
-             .rxd_out        ( serial_rxd    )
+             .txd_in         ( txd_pad_out   ),
+             .rxd_out        ( rxd_pad_in    )
         );
-

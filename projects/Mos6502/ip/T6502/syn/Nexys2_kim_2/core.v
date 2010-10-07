@@ -82,15 +82,15 @@ assign add_mon[15:0] = 16'h0000 ;
    
 
 T6502   #(
-         .ROM_WORDS    (`ROM_WORDS),    	 
-         .ROM_ADD      (`ROM_ADD),    	 
-         .ROM_FILE     (`ROM_FILE),
+         .ROM_WORDS         (`ROM_WORDS),    	 
+         .ROM_ADD           (`ROM_ADD),    	 
+         .ROM_FILE          (`ROM_FILE),
 	 .PROG_ROM_WORDS    (`PROG_ROM_WORDS),    	 
          .PROG_ROM_ADD      (`PROG_ROM_ADD),    	 
          .PROG_ROM_FILE     (`PROG_ROM_FILE),	  
-         .RAM_WORDS    (4096),           
-         .STARTUP      (`STARTUP),
-         .FONT         (`FONT)
+         .RAM_WORDS         (2048),           
+         .STARTUP           (`STARTUP),
+         .FONT              (`FONT)
          )  
  cpu   (
          .clk           ( ck25MHz       ),

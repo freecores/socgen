@@ -1,0 +1,18 @@
+    parameter RAM_WORDS         = 2048;    
+    parameter RAM_ADD           = 11;      
+    parameter ROM_WORDS         = 128;    
+    parameter ROM_ADD           = 7;      
+    parameter ROM_FILE          = "NONE";  
+    parameter PROG_ROM_WORDS    = 2048; 
+    parameter PROG_ROM_ADD      = 11;   
+    parameter PROG_ROM_FILE     = "../../../../../../Mos6502/sw/irq_2_test/irq_2_test.abs16";  
+    parameter VEC_TABLE         =  8'hff;    
+    parameter TX_FIFO           = 0;
+    parameter TX_FIFO_SIZE      = 3;
+    parameter TX_FIFO_WORDS     = 8;
+    parameter RX_FIFO           = 0;
+    parameter RX_FIFO_SIZE      = 3;
+    parameter RX_FIFO_WORDS     = 8;  
+    parameter STARTUP           = "NONE";
+    parameter FONT              = "NONE";
+

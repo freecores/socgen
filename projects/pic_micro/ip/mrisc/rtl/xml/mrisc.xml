@@ -1,7 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <components>
 <component>
    <name>mrisc</name>
    <variant>mrisc</variant>
+<interfaces>
+<interface><direction>input</direction><type>wire</type><name>clk</name></interface>
+<interface><direction>input</direction><type>wire</type><name>rst_in</name></interface>
+<interface><direction>input</direction><type>wire</type><name>wdt_en</name></interface>
+<interface><direction>input</direction><type>wire</type><name>tcki</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[10:0]</width><name>inst_addr</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[11:0]</width><name>inst_data</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>portain</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>portbin</name></interface>
+<interface><direction>input</direction><type>wire</type><width>[7:0]</width><name>portcin</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>portaout</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>portbout</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>portcout</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>trisa</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>trisb</name></interface>
+<interface><direction>output</direction><type>reg</type><width>[7:0]</width><name>trisc</name></interface>
+<interface><direction>output</direction><type>reg</type><name>porta_we</name></interface>
+<interface><direction>output</direction><type>reg</type><name>portb_we</name></interface>
+<interface><direction>output</direction><type>reg</type><name>portc_we</name></interface>
+
+
+
+</interfaces>
+
 
 
       <library>
