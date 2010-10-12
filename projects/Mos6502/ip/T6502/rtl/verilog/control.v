@@ -3,7 +3,9 @@
 
 module 
 `VARIANT`CONTROL
-#( parameter BOOT_VEC =8'hfc)
+#( parameter BOOT_VEC =8'hfc,
+   parameter STATE_SIZE=3
+)
 (
 input wire                    clk,
 input wire                    reset,
@@ -14,7 +16,7 @@ input wire                    invalid,
 input wire                    run_status, 
 input wire                    irq_status,
 input wire                    brk_status,
-input wire [`STATE_SIZE:0]    state,
+input wire [STATE_SIZE:0]    state,
 input wire   [2:0]            ctrl,
 input wire   [7:0]            ir,
 input wire  [15:0]            address,

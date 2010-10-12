@@ -2,3 +2,4 @@
 
 
 
+parameter ADDR_BITS=24;

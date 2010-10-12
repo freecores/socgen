@@ -6,9 +6,9 @@ initial
   while(1)
    begin
    cg.next(20);
-   edge_enable = 1'b1;
+   R_edge_enable = 1'b1;
    cg.next(1);
-   edge_enable = 1'b0;
+   R_edge_enable = 1'b0;
    end
  end
 
@@ -22,30 +22,30 @@ initial
  $display("          ===================================================");
  $display("              ");
 
- edge_enable          =  1'b0; 
- parity_enable        =  1'b1; 
- parity_type          =  1'b0; 
- parity_force         =  1'b0; 
- start_value          =  1'b0;
- stop_value           =  1'b1;
- pad_in               =  1'b1;
- rcv_stb              =  1'b0;
+ R_edge_enable          =  1'b0; 
+ R_parity_enable        =  1'b1; 
+ R_parity_type          =  1'b0; 
+ R_parity_force         =  1'b0; 
+ R_start_value          =  1'b0;
+ R_stop_value           =  1'b1;
+ R_pad_in               =  1'b1;
+ R_rcv_stb              =  1'b0;
 
  cg.next(12);
  cg.reset_off;
  cg.next(88);
 
  $display("%t    Test enabled   ",$realtime );
- parity_enable        =  1'b1; 
- pad_in                = 1'b0;
+ R_parity_enable        =  1'b1; 
+ R_pad_in                = 1'b0;
  cg.next(1800);
- pad_in                = 1'b1;
+ R_pad_in                = 1'b1;
  cg.next(400);
- pad_in                = 1'b0;
+ R_pad_in                = 1'b0;
 
  cg.next(2000);
 
-pad_in                = 1'b1;
+ R_pad_in                = 1'b1;
 
  cg.next(9000);
 

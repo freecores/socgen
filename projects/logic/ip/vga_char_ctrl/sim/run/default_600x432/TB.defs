@@ -1,5 +1,3 @@
 `define     PERIOD      41.16667 
 `define     TIMEOUT     20000000
-`define     STARTUP     "../../../../../sw/startup/startup.abs"
-`define     FONT        "../../../../../sw/font/font.abs"
 

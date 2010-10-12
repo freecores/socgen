@@ -1,32 +1,6 @@
 
 
 
-
-// Declare I/O Port connections
-wire [7:0]	porta; // I/O Port A
-wire [7:0]	portb; // I/O Port B
-wire [7:0]	portc; // I/O Port C
-
-wire [7:0]	portain;
-wire [7:0]	portbin;
-wire [7:0]	portcin;
-
-wire [7:0]	portaout;
-wire [7:0]	portbout;
-wire [7:0]	portcout;
-
-wire [7:0]	trisa;
-wire [7:0]	trisb;
-wire [7:0]	trisc;
-
-// Declare ROM and rom signals
-wire [10:0]	inst_addr;
-wire [11:0]	inst_data;
-
-
-
-
-
 // Instantiate one CPU to be tested.
 mrisc dut(
    .clk		(clk),
@@ -47,9 +21,19 @@ mrisc dut(
    .trisc	(trisc),
    
    .tcki	(tcki),
-   .wdt_en	(1'b1)
+   .wdt_en	(wdt_en)
 
    );
+
+
+
+wire [7:0]	porta; // I/O Port A
+wire [7:0]	portb; // I/O Port B
+wire [7:0]	portc; // I/O Port C
+
+
+
+assign     wdt_en	=1'b1;
 
 // IO buffers for IO Ports
 assign porta = trisa ? 8'bz : portaout;
@@ -94,10 +78,10 @@ pullup uc7(portc[7]);
 cde_sram
 #(
 
-.WORDS(  `ROM_WORDS), 
-.ADDR(  `ROM_ADDR  ),  
-.WIDTH (  `ROM_WIDTH ), 
-.INIT_FILE(`ROM_FILE)
+.WORDS    ( ROM_WORDS), 
+.ADDR     ( ROM_ADDR  ),  
+.WIDTH    ( ROM_WIDTH ), 
+.INIT_FILE( ROM_FILE)
 )
 
 

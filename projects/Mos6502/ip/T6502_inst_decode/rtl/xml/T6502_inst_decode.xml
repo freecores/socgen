@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+<component>
+   <name>T6502_inst_decode</name>
+   <variant>T6502_inst_decode</variant>
+   
+
+<parameters>
+
+ <parameter> 
+  <name>STATE_SIZE</name>
+  <default>3</default>
+ </parameter>   
+
+</parameters>
+
+<interfaces>   
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>clk</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>reset</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>enable</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[STATE_SIZE:0]</width>
+ <name>state</name>
+</interface>
+
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[7:0]</width>
+ <name>prog_data</name>
+</interface>
+
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>disable_ir</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>fetch_op</name>
+</interface>
+
+ 
+  
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[7:0]</width>
+ <name>ir</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[1:0]</width>
+ <name>length</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>now_fetch_op</name>
+</interface>
+ 
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>immediate</name>
+</interface>
+   
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>absolute</name>
+</interface>
+   
+ 
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>zero_page</name>
+</interface>
+   
+ 
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>indirectx</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>indirecty</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>implied</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>relative</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>stack</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>jsr</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>jump</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>jump_indirect</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>brk</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>rti</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>rts</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>invalid</name>
+</interface>
+
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[1:0]</width>
+ <name>ins_type</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[2:0]</width>
+ <name>ctrl</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[:0]</width>
+ <name></name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[2:0]</width>
+ <name>dest</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[2:0]</width>
+ <name>alu_op_a_sel</name>
+</interface>
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[1:0]</width>
+ <name>alu_op_b_sel</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <name>alu_op_b_inv</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[1:0]</width>
+ <name>alu_op_c_sel</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[1:0]</width>
+ <name>idx_sel</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[2:0]</width>
+ <name>alu_mode</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[4:0]</width>
+ <name>alu_status_update</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[7:0]</width>
+ <name>brn_value</name>
+</interface>
+
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[7:0]</width>
+ <name>brn_enable</name>
+</interface>
+
+
+</interfaces>
+
+
+   
+
+</component>
+</components>

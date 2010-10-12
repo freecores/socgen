@@ -1,7 +1,5 @@
-parameter STARTUP="NONE";
-parameter FONT="NONE";
+parameter STARTUP="../../../../../sw/startup/startup.abs";
+parameter FONT="../../../../../sw/font/font.abs";
 parameter CHARACTER_DECODE_DELAY=4;
-
-
 
 

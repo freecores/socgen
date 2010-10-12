@@ -2,48 +2,29 @@
 
 
 
-wire [23:0]        micro_addr;
-wire [15:0]        micro_wdata;
-wire               micro_rd;
-wire               micro_wr;
-wire               micro_ub;
-wire               micro_lb;
-wire  [1:0]        micro_cs;
-wire               micro_ack;
 
-wire [15:0]         micro_rdata;
 
-wire  [23:1]       memadr_out;   
-wire               memoe_n_out;   
-wire               memdb_oe;
-wire  [15:0]       memdb_out;
-wire  [15:0]       memdb_in;
-wire  [15:0]       memdb_io;
-wire               memwr_n_out;
-wire               ramcs_n_out;  
-wire               ramlb_n_out;  
-wire               ramadv_out_n; 
-wire               ramclk_out;   
-wire               ramcre_out;   
-wire               ramub_n_out;  
+
+
 
 
 flash_memcontrl
+#(.ADDR_BITS(ADDR_BITS))
 dut
 (
     .clk           ( clk          ),
     .reset         ( reset        ),
 
-    .addr          ( micro_addr[23:1]),
-    .wdata         ( micro_wdata  ),
-    .cs            ( micro_cs     ),
-    .stb           (|micro_cs     ),
-    .rd            ( micro_rd     ),
-    .wr            ( micro_wr     ),
-    .ub            ( micro_ub     ),
-    .lb            ( micro_lb     ),
-    .ack           ( micro_ack    ),
-    .rdata         ( micro_rdata  ),
+    .addr          ( addr[ADDR_BITS-1:1]),
+    .wdata         ( wdata  ),
+    .cs            ( cs     ),
+    .stb           ( stb    ),
+    .rd            ( rd     ),
+    .wr            ( wr     ),
+    .ub            ( ub     ),
+    .lb            ( lb     ),
+    .ack           ( ack    ),
+    .rdata         ( rdata  ),
 
     .memadr_out    ( memadr_out   ),   
     .memoe_n_out   ( memoe_n_out  ),   
@@ -60,21 +41,23 @@ dut
    );
 
 
+assign    stb         =|cs;
 
-
+wire [15:0]        memdb_io;
+wire               addr_0;
 micro_bus16_model
 bus16
  (
-    .clk           ( clk          ), 
-    .reset         ( reset        ),
-    .addr          ( micro_addr   ),
-    .wdata         ( micro_wdata  ),
-    .cs            ( micro_cs     ),
-    .rd            ( micro_rd     ),
-    .wr            ( micro_wr     ),
-    .ub            ( micro_ub     ),
-    .lb            ( micro_lb     ),
-    .rdata         ( micro_rdata  )
+    .clk           ( clk    ), 
+    .reset         ( reset  ),
+    .addr          ( {addr,addr_0}   ),
+    .wdata         ( wdata  ),
+    .cs            ( cs     ),
+    .rd            ( rd     ),
+    .wr            ( wr     ),
+    .ub            ( ub     ),
+    .lb            ( lb     ),
+    .rdata         ( rdata  )
 );
  
 

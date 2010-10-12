@@ -1,38 +1,5 @@
 
 
-wire    [23:1]      ext_add;
-wire    [15:0]      ext_wdata;
-wire    [15:0]      ext_rdata;
-wire                ext_ub;
-wire                ext_lb;
-wire                ext_rd;
-wire                ext_wr;
-wire    [1:0]       ext_cs;
-wire    [7:0]       alu_status;
-wire                txd_pad_out;
-wire                rxd_pad_in;
-wire                cts_pad_in;
-wire                rts_pad_out;
-wire                ps2_clk_oe;
-wire                ps2_clk_in;
-wire                ps2_data_oe;
-wire                ps2_data_in;
-wire    [7:0]       gpio_0_out;
-wire    [7:0]       gpio_0_oe;
-wire    [7:0]       gpio_0_lat;
-wire    [7:0]       gpio_0_in;
-wire    [7:0]       gpio_1_out;
-wire    [7:0]       gpio_1_oe;
-wire    [7:0]       gpio_1_lat;
-wire    [7:0]       gpio_1_in;
-wire    [3:0]       ext_irq_in;
-wire    [2:0]       vgared_pad_out;
-wire    [2:0]       vgagreen_pad_out;
-wire    [1:0]       vgablue_pad_out;
-wire                hsync_n_pad_out;
-wire                vsync_n_pad_out;
-
-
 
 
 
@@ -107,12 +74,12 @@ dut
 
 );
 
-assign     ext_irq_in     = 4'b0000      ;
+assign     ext_irq_in       = 4'b0000      ;
 assign     ext_rdata        = 16'h0000     ;
 
 assign     gpio_0_in        = gpio_0_out   ;
 assign     gpio_1_in        = gpio_1_out   ;
-assign      cts_pad_in  = rts_pad_out;
+assign     cts_pad_in       = rts_pad_out;
 
 
 

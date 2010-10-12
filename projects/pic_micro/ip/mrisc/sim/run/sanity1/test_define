@@ -6,13 +6,13 @@ initial
   	$display ("========== Starting Sanity 1 Test ========== \n");
 	repeat(10)	@(posedge clk);
 	cg.reset_off;
-	while(inst_addr != `GOOD & inst_addr != `BAD)	@(posedge clk);
+	while(inst_addr != GOOD & inst_addr != BAD)	@(posedge clk);
 	
-	if(inst_addr == `GOOD)
+	if(inst_addr == GOOD)
 	   begin
 	   end
 	else
-	if(inst_addr == `BAD)
+	if(inst_addr == BAD)
 	   begin
 		$display("Sanity1 test FAILED !!!");
 	   end

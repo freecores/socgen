@@ -201,6 +201,10 @@ foreach my $project (@projects)
              open DUTFILE,">$outfile" or die "unable to open $outfile";
 
 
+             my $outfile ="work/${project}/ip/${component}/sim/cov/${variant}/dat.sim";
+             open DUTSIMFILE,">$outfile" or die "unable to open $outfile";
+
+
 
              
 
@@ -209,31 +213,73 @@ foreach my $project (@projects)
                  my($interface_name)  = $i_name ->findnodes('./text()')->to_literal ;
                  my($width)      = $i_name ->findnodes('../width/text()')->to_literal ;
                  print DUTFILE  "wire    ${width}      ${interface_name};\n";
+                 print DUTSIMFILE  "wire    ${width}      ${interface_name};\n";
                }
 
 
-                 print DUTFILE  "\n\n\n  $variant \n dut \n (   \n";
+                 print DUTFILE  "\n\n\n  $variant \n ";
+                 print DUTSIMFILE  "\n /*   \n\n  $variant \n";
+
+
 
 
                   my $first = 1;
+             foreach  my   $i_name ($doc->findnodes("//component[name/text() = '$name']/parameters/parameter/name"))
+               {
+   
+                 my($interface_name)  = $i_name ->findnodes('./text()')->to_literal ;
+                 if($first)
+                 {
+                  print DUTFILE  "       #(.${interface_name}(${interface_name})";
+                  print DUTSIMFILE  "    #(.${interface_name}(${interface_name})";
+                  $first=0;
+                 }
+                 else
+                 {
+                  print DUTFILE  ",\n        .${interface_name}(${interface_name})";
+                  print DUTSIMFILE  ",\n        .${interface_name}(${interface_name})";
+                 }
+               }
+
+                if($first == 0)
+
+                 {
+                  print DUTFILE  ")\n";
+                  print DUTSIMFILE  ")\n";
+                 }
+
+
+
+                 print DUTFILE  " dut \n (   \n";
+                 print DUTSIMFILE  " dut \n (   \n";
+
+                   $first = 1;
              foreach  my   $i_name ($doc->findnodes("//component[name/text() = '$name']/interfaces/interface/name"))
                {
    
                  my($interface_name)  = $i_name ->findnodes('./text()')->to_literal ;
                  if($first)
-                 {print DUTFILE  "        .${interface_name}      (${interface_name})";$first=0}
+                 {
+                  print DUTFILE  "        .${interface_name}      (${interface_name})";
+                  print DUTSIMFILE  "        .${interface_name}      (${interface_name})";
+                  $first=0;
+                 }
                  else
-                 {print DUTFILE  ",\n        .${interface_name}   (${interface_name})";}
+                 {
+                  print DUTFILE  ",\n        .${interface_name}   (${interface_name})";
+                  print DUTSIMFILE  ",\n        .${interface_name}   (${interface_name})";
+                 }
                }
 
 
                  print DUTFILE  "\n  );\n\n\n\n";
+                 print DUTSIMFILE  "\n  );\n */   \n\n\n";
 
 
 
 
 
-             print "CREATING sim filelists for   $project  $component   $chip   $name  $variant \n"; 
+             print "CREATING sim files for   $project  $component   $chip   $name  $variant \n"; 
              foreach  my   $i_name ($doc->findnodes("//component[name/text() = '$name']/sims/sim/name"))
                {
                  my($chip)  = $i_name ->findnodes('./text()')->to_literal ;
@@ -244,6 +290,15 @@ foreach my $project (@projects)
                  $cmd  = 
                  "cp    $infile  $outfile" ;
                  if (system($cmd)) {}
+
+                 my $infile ="work/${project}/ip/${component}/sim/cov/${variant}/dat.sim";
+                 my $outfile ="work/${project}/ip/${component}/sim/run/${chip}/dat.sim";
+
+                 $cmd  = 
+                 "cp    $infile  $outfile" ;
+                 if (system($cmd)) {}
+
+
                }
 
 

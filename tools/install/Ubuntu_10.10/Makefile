@@ -13,6 +13,9 @@ install:
 	mkdir ~/bin;\
 	cp ../../bin/* ~/bin;\
         sudo apt-get  install -y subversion;\
+	sudo apt-get  install -y k3b;\
+	sudo apt-get  install -y emacs;\
+	sudo apt-get  install -y seamonkey;\
         sudo apt-get  install -y libverilog-perl;\
 	sudo apt-get  install -y libxml-libxml-perl;\
         sudo apt-get  install -y iverilog;\

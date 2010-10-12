@@ -1,46 +1,40 @@
-wire  h_sync;
-wire  v_sync;
-
-wire  red;
-wire  green;
-wire  blue;
 
 
-
-
-wire [7:0]           wdata;
-wire [13:0]           address;
-
-wire [2:0]          vga_red_pad_out;
-wire [2:0]          vga_green_pad_out;
-wire [1:0]          vga_blue_pad_out;
-wire                hsync_n_pad_out;
-wire                vsync_n_pad_out;
  
 
 vga_char_ctrl 
-#(.STARTUP(`STARTUP),
-  .FONT(`FONT))
+#(.STARTUP(STARTUP),
+  .FONT(FONT),
+  .CHARACTER_DECODE_DELAY(CHARACTER_DECODE_DELAY))
 dut (
-     .clk                 ( clk              ),
-     .reset               ( reset            ),
+     .clk                 ( clk               ),
+     .reset               ( reset             ),
 
-     .ascii_load          (1'b0),
-     .add_l_load          (1'b0),
-     .add_h_load          (1'b0),
+     .ascii_load          ( ascii_load        ),
+     .add_l_load          ( add_l_load        ),
+     .add_h_load          ( add_h_load        ),
 
-     .char_color          (8'h92),
-     .back_color          (8'h00),
-     .cursor_color        (8'hff),
+     .char_color          ( char_color        ),
+     .back_color          ( back_color        ),
+     .cursor_color        ( cursor_color      ),
 
-     .wdata               (8'h00),
-     .address             ( address),
+     .wdata               ( wdata             ),
+     .address             ( address           ),
 
      .vga_red_pad_out     ( vga_red_pad_out   ),
      .vga_green_pad_out   ( vga_green_pad_out ),
      .vga_blue_pad_out    ( vga_blue_pad_out  ),
 
-     .hsync_n_pad_out     ( hsync_n_pad_out  ),      
-     .vsync_n_pad_out     ( vsync_n_pad_out  )
+     .hsync_n_pad_out     ( hsync_n_pad_out   ),      
+     .vsync_n_pad_out     ( vsync_n_pad_out   )
 );
    
+
+
+assign  ascii_load          =   1'b0;
+assign  add_l_load          =   1'b0;
+assign  add_h_load          =   1'b0;
+assign  char_color          =   8'h92;
+assign  back_color          =   8'h00;
+assign  cursor_color        =   8'hff;
+assign  wdata               =   8'h00;

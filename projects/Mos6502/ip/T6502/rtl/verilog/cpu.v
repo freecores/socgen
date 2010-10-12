@@ -2,8 +2,9 @@
 `include "defines.v"
 
 module `VARIANT`CPU
-#( parameter VEC_TABLE = 8'hff,
-   parameter BOOT_VEC  = 8'hfc
+#( parameter VEC_TABLE  = 8'hff,
+   parameter BOOT_VEC   = 8'hfc,
+   parameter STATE_SIZE = 3
 )
 
 
@@ -53,7 +54,7 @@ module `VARIANT`CPU
     wire    [7:0]   ir;                       // instruction register
     wire    [1:0]   length;                   // instruction length
 
-    wire    [`STATE_SIZE:0]   state;          // current and next state registers
+    wire    [STATE_SIZE:0]   state;          // current and next state registers
 
     wire    [2:0]   dest;
     wire    [2:0]   ctrl;
@@ -130,7 +131,9 @@ assign alu_enable =  ((alu_enable_s || implied || stack  ) && !((state == `INT_1
 
 
 `VARIANT`CONTROL
-#( .BOOT_VEC (BOOT_VEC))
+#( .BOOT_VEC (BOOT_VEC),
+   .STATE_SIZE(STATE_SIZE)
+)
 control(
    .clk               ( clk               ),
    .reset             ( reset             ), 
@@ -153,6 +156,7 @@ control(
 
 
 `VARIANT`STATE_FSM
+#(.STATE_SIZE(STATE_SIZE))
 state_fsm (
    .clk               ( clk               ),         
    .reset             ( core_reset        ),        
@@ -182,6 +186,7 @@ state_fsm (
 );
    
 `VARIANT`INST_DECODE
+#(.STATE_SIZE(STATE_SIZE))
 inst_decode (
    .clk               ( clk               ),         
    .reset             ( reset             ),        
@@ -230,7 +235,9 @@ inst_decode (
       		    last_prg_cnt_0 <= prog_counter[0];
 
 `VARIANT`SEQUENCER
-#( .VEC_TABLE (VEC_TABLE))  
+#( .VEC_TABLE (VEC_TABLE),
+   .STATE_SIZE(STATE_SIZE))
+  
 sequencer (
    .clk               ( clk               ),         
    .reset             ( reset             ),        

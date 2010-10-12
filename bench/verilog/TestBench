@@ -76,9 +76,9 @@ begin
 `TIMEFORMAT
 end
 
-wire clk;
-wire reset;
 
+
+`include "./dat.sim"
 `include "./dut"
 `include "./test_define"
 

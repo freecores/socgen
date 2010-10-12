@@ -2,3 +2,16 @@
 
 
 
+parameter  ROM_WORDS =  2048; 
+parameter  ROM_ADDR   =  11;  
+parameter  ROM_WIDTH  = 12;  
+parameter  ROM_FILE = "../../../../../sw/sanity1/sanity1.abs12";
+parameter  GOOD  = 12'h0aa;
+parameter  BAD   = 12'h0af;
+
+
+
+
+
+
+

@@ -1,4 +1,5 @@
 
-
-
-
+parameter FREQ=25;                   
+parameter CLK_HOLD_DELAY   =100;     
+parameter DATA_SETUP_DELAY =20;      
+parameter DEBOUNCE_DELAY   =4'b1111; 

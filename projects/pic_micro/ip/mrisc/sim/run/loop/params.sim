@@ -1,3 +1,10 @@
+parameter   ROM_WORDS = 2048; 
+parameter   ROM_ADDR   = 11;  
+parameter   ROM_WIDTH  = 12;  
+parameter   ROM_FILE = "../../../../../sw/loop/loop.abs12";
+
+
+
 
 
 

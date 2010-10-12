@@ -1,10 +1,15 @@
-parameter  ROM_FILE          = "NONE";
-parameter  ROM_WORDS         = 0;
-parameter  ROM_ADDR          = 0;
-parameter  ROM_WIDTH         = 0;
+parameter  ROM_FILE          = "../../../../../sw/mouse/mouse.abs12";
+parameter  ROM_WORDS         = 2048;
+parameter  ROM_ADDR          = 11;
+parameter  ROM_WIDTH         = 12;
 parameter  TX_FIFO           = 0;
 parameter  TX_FIFO_SIZE      = 3;
 parameter  TX_FIFO_WORDS     = 8;
 parameter  RX_FIFO           = 0;
 parameter  RX_FIFO_SIZE      = 3;
 parameter  RX_FIFO_WORDS     = 8;    
+
+
+
+
+

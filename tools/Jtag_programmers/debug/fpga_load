@@ -1,0 +1,6 @@
+bsdl path ../bsdl;../target/bsdl;
+cable usbblaster
+detect
+part 1
+svf bitstream.svf
+

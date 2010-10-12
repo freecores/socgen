@@ -1,86 +1,81 @@
 
-wire        host_parity_enable      ;
-
-wire        host_txd_parity         ;
-wire        host_txd_force_parity   ;
-wire [7:0]  host_txd_data_in        ;
-wire        host_txd_buffer_empty   ;
-wire        host_txd_load           ;
-wire        host_txd_break          ;
-
-wire        host_rxd_parity         ;
-wire        host_rxd_force_parity   ;
-wire [7:0]  host_rxd_data_out       ;
-wire        host_rxd_data_avail     ;
-wire        host_rxd_data_avail_stb ;
-wire        host_rxd_stop_error     ;
-wire        host_rxd_parity_error   ;
-wire        host_rx_data_avail      ;
 
 
 uart
 #(
-  .RX_FIFO(1),
-  .RX_FIFO_SIZE(4),
-  .RX_FIFO_WORDS(16),
-  .TX_FIFO(1),
-  .TX_FIFO_SIZE(3),
-  .TX_FIFO_WORDS(8))
+              .PRESCALE(PRESCALE),
+              .PRE_SIZE(PRE_SIZE),
+              .SIZE(SIZE),
+              .DIV(DIV),
+              .DIV_SIZE(DIV_SIZE),
+              .TX_FIFO(TX_FIFO),
+              .TX_FIFO_SIZE(TX_FIFO_SIZE),
+              .TX_FIFO_WORDS(TX_FIFO_WORDS),
+              .RX_FIFO(RX_FIFO),
+              .RX_FIFO_SIZE(RX_FIFO_SIZE),
+              .RX_FIFO_WORDS(RX_FIFO_WORDS)) 
+
+
  dut(
-         .clk                 ( clk                     ),
-         .reset               ( reset                   ),
-         .parity_enable       ( host_parity_enable      ),
-         .divider_in          ( 4'b0000                 ),
-         .txd_parity          ( host_txd_parity         ),
-         .txd_force_parity    ( host_txd_force_parity   ),
-         .txd_data_in         ( host_txd_data_in        ),
-         .txd_buffer_empty    ( host_txd_buffer_empty   ),
-         .txd_load            ( host_txd_load           ),
-         .txd_break           ( host_txd_break          ),
-         .rxd_parity          ( host_rxd_parity         ),
-         .rxd_force_parity    ( host_rxd_force_parity   ),
-         .rxd_data_out        ( host_rxd_data_out       ),
-         .rxd_stop_error      ( host_rxd_stop_error     ),
-         .rxd_parity_error    ( host_rxd_parity_error   ),
-         .rxd_data_avail      ( host_rxd_data_avail     ),
-         .rxd_data_avail_stb  ( host_rxd_data_avail_stb ),
-         .txd_pad_out         ( serial_txd              ),
-         .rxd_pad_in          ( serial_rxd              ),
-         .cts_pad_in          ( 1'b0                    ),
-         .rts_pad_out         (                         ),
-         .cts_out             (                         ),
-         .rts_in              ( 1'b0                    )
+         .clk                 ( clk                ),
+         .reset               ( reset              ),
+         .parity_enable       ( parity_enable      ),
+         .divider_in          ( divider_in         ),
+         .txd_parity          ( txd_parity         ),
+         .txd_force_parity    ( txd_force_parity   ),
+         .txd_data_in         ( txd_data_in        ),
+         .txd_buffer_empty    ( txd_buffer_empty   ),
+         .txd_load            ( txd_load           ),
+         .txd_break           ( txd_break          ),
+         .rxd_parity          ( rxd_parity         ),
+         .rxd_force_parity    ( rxd_force_parity   ),
+         .rxd_data_out        ( rxd_data_out       ),
+         .rxd_stop_error      ( rxd_stop_error     ),
+         .rxd_parity_error    ( rxd_parity_error   ),
+         .rxd_data_avail      ( rxd_data_avail     ),
+         .rxd_data_avail_stb  ( rxd_data_avail_stb ),
+         .txd_pad_out         ( txd_pad_out        ),
+         .rxd_pad_in          ( rxd_pad_in         ),
+         .cts_pad_in          ( cts_pad_in         ),
+         .rts_pad_out         ( rts_pad_out        ),
+         .cts_out             ( cts_out            ),
+         .rts_in              ( rtx_in             )
 );
+
+assign    divider_in          = 4'b0000;
+assign    rts_in              = 1'b0;
+assign    cts_pad_in          = 1'b0;
 
 uart_host
 uart_host(
-         .clk                 ( clk                     ),
-         .reset               ( reset                   ),
-         .parity_enable       ( host_parity_enable      ),
-         .txd_parity          ( host_txd_parity         ),
-         .txd_force_parity    ( host_txd_force_parity   ),
-         .txd_data_in         ( host_txd_data_in        ),
-         .txd_buffer_empty    ( host_txd_buffer_empty   ),
-         .txd_load            ( host_txd_load           ),
-         .txd_break           ( host_txd_break          ),
-         .rxd_parity          ( host_rxd_parity         ),
-         .rxd_force_parity    ( host_rxd_force_parity   ),
-         .rxd_data_out        ( host_rxd_data_out       ),
-         .rxd_data_avail      ( host_rxd_data_avail     ),
-         .rxd_data_avail_stb  ( host_rxd_data_avail_stb ),
-         .rxd_stop_error      ( host_rxd_stop_error     ),
-         .rxd_parity_error    ( host_rxd_parity_error   )
+         .clk                 ( clk                ),
+         .reset               ( reset              ),
+         .parity_enable       ( parity_enable      ),
+         .txd_parity          ( txd_parity         ),
+         .txd_force_parity    ( txd_force_parity   ),
+         .txd_data_in         ( txd_data_in        ),
+         .txd_buffer_empty    ( txd_buffer_empty   ),
+         .txd_load            ( txd_load           ),
+         .txd_break           ( txd_break          ),
+         .rxd_parity          ( rxd_parity         ),
+         .rxd_force_parity    ( rxd_force_parity   ),
+         .rxd_data_out        ( rxd_data_out       ),
+         .rxd_data_avail      ( rxd_data_avail     ),
+         .rxd_data_avail_stb  ( rxd_data_avail_stb ),
+         .rxd_stop_error      ( rxd_stop_error     ),
+         .rxd_parity_error    ( rxd_parity_error   )
 );
+
 
 
 
 
 uart_model     #(.CLKCNT(4'hc))
 uart_model (
-             .clk            ( clk           ),
-             .reset          ( reset         ),
-             .txd_in         ( serial_txd    ),
-             .rxd_out        ( serial_rxd    )
+             .clk            ( clk          ),
+             .reset          ( reset        ),
+             .txd_in         ( txd_pad_out  ),
+             .rxd_out        ( rxd_pad_in   )
         );
 
 

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+<component>
+   <name>T6502_state_fsm</name>
+   <variant>T6502_state_fsm</variant>
+   
+
+<parameters>
+
+ <parameter> 
+  <name>STATE_SIZE</name>
+  <default>3</default>
+ </parameter>   
+</parameters>
+
+<interfaces>   
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>clk</name>
+</interface>
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>reset</name>
+</interface>
+ 
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>enable</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>run</name>
+</interface>
+
+ 
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[1:0]</width>
+ <name>cmd</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[1:0]</width>
+ <name>length</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>now_fetch_op</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <width>[1:0]</width>
+ <name>ins_type</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>absolute</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>immediate</name>
+</interface>
+ 
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>implied</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>indirectx</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>indirecty</name>
+</interface>
+
+ 
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>stack</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>relative</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>brk</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>rts</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>jump_indirect</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>jump</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>jsr</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>rti</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>branch_inst</name>
+</interface>
+
+<interface>
+ <direction>input</direction>
+ <type>wire</type>
+ <name>invalid</name>
+</interface>
+
+<interface>
+ <direction>output</direction>
+ <type>reg</type>
+ <width>[STATE_SIZE:0]</width>
+ <name>state</name>
+</interface>
+
+</interfaces>
+
+</component>
+</components>

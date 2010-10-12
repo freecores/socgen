@@ -2,23 +2,9 @@
 
 
 
-reg   [3:0] btn_pad_in;
-reg   [7:0] sw_pad_in;
-
-wire   [7:0] led;
-wire   [6:0] seg;
-wire         dp;
-wire   [3:0] an;
-
-reg  [15:0]        PosD;
-reg  [7:0]         PosL;
-wire [7:0]         PosS;
-wire [3:0]         PosB;
 
 
-wire            clk_tgen;
-wire            out_tgen;
-wire            in_tgen;
+
 
 
 disp_io 
@@ -30,14 +16,30 @@ dut ( .clk               (clk),
       .PosL              (PosL),
       .PosB              (PosB),
       .PosS              (PosS),
-      .led_pad_out       (led),
-      .seg_pad_out       (seg),
-      .dp_pad_out        (dp),
-      .an_pad_out        (an)
+      .led_pad_out       (led_pad_out),
+      .seg_pad_out       (seg_pad_out),
+      .dp_pad_out        (dp_pad_out),
+      .an_pad_out        (an_pad_out)
     );
 
 
+reg   [3:0] R_btn_pad_in;
+reg   [7:0] R_sw_pad_in;
+reg  [15:0] R_PosD;
+reg  [7:0]  R_PosL;
 
+
+assign   btn_pad_in = R_btn_pad_in;
+assign   sw_pad_in  = R_sw_pad_in;
+assign   PosD       = R_PosD;
+assign   PosL       = R_PosL;
+
+
+
+
+wire            clk_tgen;
+wire            out_tgen;
+wire            in_tgen;
 
 
 reg   [3:0] test_cnt;

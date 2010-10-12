@@ -270,6 +270,16 @@
             <variant>T6502_alu_logic</variant>
             <component>T6502_alu_logic</component>
           </brother>
+          <brother>
+            <variant>T6502_inst_decode</variant>
+            <component>T6502_inst_decode</component>
+          </brother>
+          <brother>
+            <variant>T6502_state_fsm</variant>
+            <component>T6502_state_fsm</component>
+          </brother>
+
+
       </brothers>
 
       <children>

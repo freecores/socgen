@@ -18,8 +18,6 @@
 `define BOOT_VEC        16'hFFFC
 `define IRQ_VEC         16'hFFFE
 
-`define STATE_SIZE      3
-
 
 `define RESET           4'b0000
 `define HALT            4'b0001

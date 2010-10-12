@@ -2,3 +2,14 @@
 
 
 
+parameter  ROM_WORDS = 2048; 
+parameter  ROM_ADDR   = 11  ;
+parameter  ROM_WIDTH  = 12  ;
+parameter  ROM_FILE  = "../../../../../sw/rf3/rf3.abs12";
+
+
+
+
+
+
+

@@ -2,7 +2,9 @@
 `include "defines.v"
 
 module `VARIANT`SEQUENCER
-#(parameter VEC_TABLE = 8'hff)
+#(parameter VEC_TABLE = 8'hff,
+  parameter STATE_SIZE=3
+)
 
 (
 
@@ -10,7 +12,7 @@ module `VARIANT`SEQUENCER
     input  wire            reset,        
     input  wire            enable,
     input  wire            now_fetch_op,
-    input  wire    [`STATE_SIZE:0]   state,         // current and next state registers
+    input  wire    [STATE_SIZE:0]   state,         // current and next state registers
     input  wire    [1:0]   cmd,         
     input  wire    [7:0]   vector,         
     input  wire    [1:0]   length,         

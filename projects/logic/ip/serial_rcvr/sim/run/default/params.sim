@@ -2,3 +2,12 @@
 
 
 
+  parameter     WIDTH=8;
+  parameter     SIZE=4 ;       
+  parameter     SAMPLE=4'b0111;
+  parameter     RX_FIFO=0;
+  parameter     RX_FIFO_SIZE=4;
+  parameter     RX_FIFO_WORDS=16;
+
+  
+  

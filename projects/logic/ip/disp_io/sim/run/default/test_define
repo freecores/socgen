@@ -5,10 +5,10 @@ initial
  $display("%t  Test Start",$realtime);
  $display("          ===================================================");
  $display("              ");
- PosD           = 16'b0000000000000000;
- PosL           = 8'b00000000;
- sw_pad_in      = 8'b00000000;
- btn_pad_in     = 4'b0000;
+ R_PosD           = 16'b0000000000000000;
+ R_PosL           = 8'b00000000;
+ R_sw_pad_in      = 8'b00000000;
+ R_btn_pad_in     = 4'b0000;
 
  cg.next(8);
  cg.reset_off;
@@ -17,17 +17,17 @@ initial
 
  cg.next(1000);
 
- PosD           = 16'b1010101010101010;
- PosL           = 8'b10101010;
- sw_pad_in      = 8'b10101010;
- btn_pad_in     = 4'b1010;
+ R_PosD           = 16'b1010101010101010;
+ R_PosL           = 8'b10101010;
+ R_sw_pad_in      = 8'b10101010;
+ R_btn_pad_in     = 4'b1010;
 
  cg.next(1000);
 
- PosD           = 16'b1111111111111111;
- PosL           = 8'b11111111;
- sw_pad_in      = 8'b11111111;
- btn_pad_in     = 4'b1111;
+ R_PosD           = 16'b1111111111111111;
+ R_PosL           = 8'b11111111;
+ R_sw_pad_in      = 8'b11111111;
+ R_btn_pad_in     = 4'b1111;
 
 
 
