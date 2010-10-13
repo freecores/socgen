@@ -20,7 +20,6 @@ install:
         sudo apt-get  install -y gputils;\
 	sudo apt-get  install -y gtkterm;\
 	sudo apt-get  install -y gtkwave;\
-	sudo apt-get  install -y crasm;\
 	sudo apt-get  install -y eclipse;\
 	sudo apt-get  install -y perl-tk;\
 	sudo apt-get  install -y perl-doc;\
